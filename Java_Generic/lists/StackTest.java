@@ -7,6 +7,16 @@ static boolean SUCCESS = true;
 
 static void test(Stack<Integer> S, Stack<Integer> S1) {
     String temp;
+    
+    // Test pop with empty stack
+    if (S.pop() != null)
+    	SUCCESS = false;
+    
+    // Test topValue with empty stack
+    if (S.topValue() != null)
+    	SUCCESS = false;
+    
+    //Test push and pop
     S.push(10);
     S.push(20);
     S.push(15);
@@ -21,6 +31,23 @@ static void test(Stack<Integer> S, Stack<Integer> S1) {
     temp = S.toString();
     if (!temp.equals(""))
       SUCCESS = false;
+    
+    // Test topValue
+    if (S1.topValue() != 10)
+    	SUCCESS = false;
+    
+    // Test clear
+    S1.clear();
+    if (!temp.equals(""))
+        SUCCESS = false;
+    
+    // Test length
+    S.clear();
+    S.push(100);
+    S.push(200);
+    S.push(150);
+    if (S.length() != 3)
+    	SUCCESS = false;
 }
 
 public static void main(String args[]) throws IOException {
