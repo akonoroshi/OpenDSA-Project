@@ -52,7 +52,17 @@ static void test(Stack<Integer> s) {
 }
 
 static boolean check(Stack s, ArrayList a) {
+	// Check the length of stack
+	if (s.length() != a.size()) {
+		return false;
+	}
 	
+	// Check values in stack
+	for (int i = 0; i < s.length(); i++) {
+		if (s.pop() != a.get(a.size() - i)) {
+			return false;
+		}
+	}
 	return true;
 }
 
