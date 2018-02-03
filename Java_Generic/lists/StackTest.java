@@ -42,13 +42,21 @@ static void test(Stack<Integer> s) {
     if (!s.toString().equals(""))
         SUCCESS = false;
     
+    ArrayList<Integer> a = new ArrayList<Integer>();
+    
+    for (int i = 0; i < 10; i++) {
+    	s.push(100 + i);
+    	a.add(100 + i);
+    }
+    check (s, a);
+    
     // Test length
-    s.clear();
+    /*s.clear();
     s.push(100);
     s.push(200);
     s.push(150);
     if (s.length() != 3)
-    	SUCCESS = false;
+    	SUCCESS = false;*/
 }
 
 static boolean check(Stack s, ArrayList a) {
