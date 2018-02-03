@@ -1,12 +1,12 @@
 package lists;
 import java.io.*;
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class StackTest {
 
 static boolean SUCCESS = true;
 
-static void test(Stack s, Stack s1) {
+static void test(Stack<Integer> s) {
     String temp;
     
     // Test pop with empty stack
@@ -18,7 +18,7 @@ static void test(Stack s, Stack s1) {
     	SUCCESS = false;
     
     //Test push and pop
-    s.push(10);
+    /*s.push(10);
     s.push(20);
     s.push(15);
     temp = s.toString();
@@ -32,14 +32,14 @@ static void test(Stack s, Stack s1) {
     temp = s.toString();
     if (!temp.equals(""))
       SUCCESS = false;
-    
+    */
     // Test topValue
     //if (s1.topValue() != 10)
     	//SUCCESS = false;
     
     // Test clear
-    s1.clear();
-    if (!temp.equals(""))
+    s.clear();
+    if (!s.toString().equals(""))
         SUCCESS = false;
     
     // Test length
@@ -51,14 +51,19 @@ static void test(Stack s, Stack s1) {
     	SUCCESS = false;
 }
 
+static boolean check(Stack s, ArrayList a) {
+	
+	return true;
+}
+
 public static void main(String args[]) throws IOException {
   AStack<Integer> as = new AStack<Integer>();
   AStack<Integer> as1 = new AStack<Integer>();
   LStack<Integer> ls = new LStack<Integer>();
   LStack<Integer> ls1 = new LStack<Integer>();
 
-  test(as, as1);
-  test(ls, ls1);
+  test(as);
+  test(ls);
   
   // Test String
   
