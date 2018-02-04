@@ -46,19 +46,26 @@ public class StackTest {
 		// Check the length of stack
 		if (s.length() != a.size()) {
 			err++;
+			System.err.println("An unexpected length of your stack. \nLength of stack: " + s.length()
+					+ "\nLength expected: " + a.size());
 			return false;
 		}
-		
+
 		// Check topValue
 		if (!s.topValue().equals(a.get(a.size() - 1))) {
 			err++;
+			System.err.println("An unexpected topValue in your stack. \nTopValue in stack: " + s.topValue().toString()
+					+ "\nValue expected: " + a.get(a.size() - 1).toString());
 			return false;
 		}
 
 		// Check values in stack
 		for (int i = 0; i < s.length(); i++) {
-			if (!s.pop().equals(a.get(a.size() - i - 1))) {
+			E popped = s.pop();
+			if (!popped.equals(a.get(a.size() - i - 1))) {
 				err++;
+				System.err.println("An unexpected value in your stack. \nPopped from stack: " + popped.toString()
+						+ "\nValue expected: " + a.get(a.size() - i - 1).toString());
 				return false;
 			}
 		}
@@ -66,15 +73,20 @@ public class StackTest {
 	}
 
 	static <E> boolean checkEmp(Stack<E> s) {
-		// Test pop with empty stack
-		if (s.pop() != null) {
-			err ++;
-			return false;
-		}
-
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
 			err++;
+			System.err.println("An unexpected topValue in your empty stack. \nTopValue in stack: "
+					+ s.topValue().toString() + "\nValue expected: null");
+			return false;
+		}
+
+		// Test pop with empty stack
+		E popped = s.pop();
+		if (popped != null) {
+			err++;
+			System.err.println("An unexpected value in your empty stack. \nPopped from stack: " + popped.toString()
+					+ "\nValue expected: null");
 			return false;
 		}
 
@@ -82,9 +94,10 @@ public class StackTest {
 		s.clear();
 		if (!s.toString().equals("")) {
 			err++;
+			System.err.println("The clear method does not work. \nPrinted stack: " + s.toString());
 			return false;
 		}
-			
+
 		return true;
 	}
 
