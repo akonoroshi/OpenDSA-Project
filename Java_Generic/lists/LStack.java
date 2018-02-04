@@ -25,8 +25,8 @@ class LStack<E> implements Stack<E> {
 
 // Put "it" on stack
 /* *** ODSATag: LStackPush *** */  
-  public boolean push(E it) {  
-    top = new Link<E>(it, top);
+  public boolean push(E it) { 
+	  top = new Link<E>(it, top);
     size++;
     return true;
   }

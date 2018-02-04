@@ -48,8 +48,10 @@ static void test(Stack<Integer> s) {
     	s.push(100 + i);
     	a.add(100 + i);
     }
-    check (s, a);
     
+    if (!check(s, a)) {
+    	SUCCESS = false;
+    }
     // Test length
     /*s.clear();
     s.push(100);
@@ -67,7 +69,7 @@ static boolean check(Stack s, ArrayList a) {
 	
 	// Check values in stack
 	for (int i = 0; i < s.length(); i++) {
-		if (s.pop() != a.get(a.size() - i)) {
+		if (s.pop() != a.get(a.size() - i - 1)) {
 			return false;
 		}
 	}
