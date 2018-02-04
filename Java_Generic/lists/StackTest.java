@@ -8,16 +8,13 @@ public class StackTest {
 	static boolean SUCCESS = true;
 
 	static void testInt(Stack<Integer> s) {
-		String temp;
+		// String temp;
 
-		// Test pop with empty stack
-		if (s.pop() != null)
+		// Check empty stack
+		if (!checkEmp(s)) {
 			SUCCESS = false;
+		}
 
-		// Test topValue with empty stack
-		if (s.topValue() != null)
-			SUCCESS = false;
-		
 		/*
 		 * s.push(10); s.push(20); s.push(15); temp = s.toString(); if
 		 * (!temp.equals("15 20 10 ")) SUCCESS = false; while(s.length() > 0)
@@ -28,11 +25,6 @@ public class StackTest {
 		// Test topValue
 		// if (s1.topValue() != 10)
 		// SUCCESS = false;
-
-		// Test clear
-		s.clear();
-		if (!s.toString().equals(""))
-			SUCCESS = false;
 
 		// Test push and pop
 		ArrayList<Integer> a = new ArrayList<Integer>();
@@ -51,20 +43,10 @@ public class StackTest {
 	}
 
 	static void testStr(Stack<String> s) {
-		String temp;
-
-		// Test pop with empty stack
-		if (s.pop() != null)
+		// Check empty stack
+		if (!checkEmp(s)) {
 			SUCCESS = false;
-
-		// Test topValue with empty stack
-		if (s.topValue() != null)
-			SUCCESS = false;
-
-		// Test clear
-		s.clear();
-		if (!s.toString().equals(""))
-			SUCCESS = false;
+		}
 
 		// Test push and pop
 		ArrayList<String> a = new ArrayList<String>();
@@ -89,6 +71,22 @@ public class StackTest {
 				return false;
 			}
 		}
+		return true;
+	}
+
+	static boolean checkEmp(Stack s) {
+		// Test pop with empty stack
+		if (s.pop() != null)
+			return false;
+
+		// Test topValue with empty stack
+		if (s.topValue() != null)
+			return false;
+
+		// Test clear
+		s.clear();
+		if (!s.toString().equals(""))
+			return false;
 		return true;
 	}
 
