@@ -8,25 +8,12 @@ public class StackTest {
 	static boolean SUCCESS = true;
 
 	static void testInt(Stack<Integer> s) {
-		// String temp;
-
 		// Check empty stack
 		if (!checkEmp(s)) {
 			SUCCESS = false;
 		}
 
-		/*
-		 * s.push(10); s.push(20); s.push(15); temp = s.toString(); if
-		 * (!temp.equals("15 20 10 ")) SUCCESS = false; while(s.length() > 0)
-		 * s1.push(s.pop()); temp = s1.toString(); if
-		 * (!temp.equals("10 20 15 ")) SUCCESS = false; temp = s.toString(); if
-		 * (!temp.equals("")) SUCCESS = false;
-		 */
-		// Test topValue
-		// if (s1.topValue() != 10)
-		// SUCCESS = false;
-
-		// Test push and pop
+		// Test length, topValue, push, and pop
 		ArrayList<Integer> a = new ArrayList<Integer>();
 		for (int i = 0; i < 10; i++) {
 			s.push(100 + i);
@@ -35,11 +22,6 @@ public class StackTest {
 		if (!check(s, a)) {
 			SUCCESS = false;
 		}
-		// Test length
-		/*
-		 * s.clear(); s.push(100); s.push(200); s.push(150); if (s.length() !=
-		 * 3) SUCCESS = false;
-		 */
 	}
 
 	static void testStr(Stack<String> s) {
@@ -48,7 +30,7 @@ public class StackTest {
 			SUCCESS = false;
 		}
 
-		// Test push and pop
+		// Test length, topValue, push, and pop
 		ArrayList<String> a = new ArrayList<String>();
 		for (int i = 0; i < 10; i++) {
 			s.push("String" + i);
@@ -62,6 +44,11 @@ public class StackTest {
 	static <E> boolean check(Stack<E> s, ArrayList<E> a) {
 		// Check the length of stack
 		if (s.length() != a.size()) {
+			return false;
+		}
+		
+		// Check topValue
+		if (!s.topValue().equals(a.get(a.size() - 1))) {
 			return false;
 		}
 
