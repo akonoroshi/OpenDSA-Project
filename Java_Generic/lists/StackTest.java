@@ -59,7 +59,7 @@ public class StackTest {
 		}
 	}
 
-	static boolean check(Stack s, ArrayList a) {
+	static <E> boolean check(Stack<E> s, ArrayList<E> a) {
 		// Check the length of stack
 		if (s.length() != a.size()) {
 			return false;
@@ -74,7 +74,7 @@ public class StackTest {
 		return true;
 	}
 
-	static boolean checkEmp(Stack s) {
+	static <E> boolean checkEmp(Stack<E> s) {
 		// Test pop with empty stack
 		if (s.pop() != null)
 			return false;
