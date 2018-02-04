@@ -34,8 +34,8 @@ public class StackTest {
 		// Test length, topValue, push, and pop
 		ArrayList<String> a = new ArrayList<String>();
 		for (int i = 0; i < 10; i++) {
-			s.push("String" + i);
-			a.add("String" + i);
+			s.push("Str" + i);
+			a.add("Str" + i);
 		}
 		if (!check(s, a)) {
 			success = false;
@@ -59,6 +59,18 @@ public class StackTest {
 			return false;
 		}
 
+		// Check toString
+		StringBuffer out = new StringBuffer(a.size() * 4);
+		for (int i=a.size() - 1; i >= 0; i--) {
+		      out.append(a.get(i));
+		      out.append(" ");
+		    }
+		System.out.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + out.toString());
+		if (!s.toString().equals(out.toString())) {
+			err++;
+			return false;
+		}
+		
 		// Check values in stack
 		for (int i = 0; i < s.length(); i++) {
 			E popped = s.pop();
@@ -121,7 +133,7 @@ public class StackTest {
 			output.close();
 			System.out.println("Success!");
 		} else {
-			System.out.println("Testing failed. There are " + err + "of error(s) in your codes");
+			System.out.println("Testing failed. There are " + err + " error(s) in your codes");
 		}
 	}
 
