@@ -14,7 +14,8 @@ public class StackTest {
 			success = false;
 		}
 
-		// Test length, topValue, push, and pop
+		// Compare Stack with ArrayList to test length, topValue, toString,
+		// push, and pop
 		ArrayList<Integer> a = new ArrayList<Integer>();
 		for (int i = 0; i < 10; i++) {
 			s.push(100 + i);
@@ -31,7 +32,8 @@ public class StackTest {
 			success = false;
 		}
 
-		// Test length, topValue, push, and pop
+		// Compare Stack with ArrayList to test length, topValue, toString,
+		// push, and pop
 		ArrayList<String> a = new ArrayList<String>();
 		for (int i = 0; i < 10; i++) {
 			s.push("Str" + i);
@@ -68,6 +70,7 @@ public class StackTest {
 		System.out.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + out.toString());
 		if (!s.toString().equals(out.toString())) {
 			err++;
+			System.err.println("The toString method in " + s.getClass() + " has some errors.");
 			return false;
 		}
 
@@ -134,7 +137,7 @@ public class StackTest {
 			output.close();
 			System.out.println("Success!");
 		} else {
-			System.out.println("Testing failed. There are " + err + " error(s) in your codes");
+			System.out.println("Testing failed. There are " + err + " error(s) in your codes.");
 		}
 	}
 
