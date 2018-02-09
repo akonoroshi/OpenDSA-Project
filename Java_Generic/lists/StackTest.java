@@ -1,7 +1,6 @@
 package lists;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class StackTest {
@@ -15,14 +14,14 @@ public class StackTest {
 			success = false;
 		}
 
-		// Compare Stack with ArrayList to test length, topValue, toString,
+		// Compare Stack with java.util.Stack to test length, topValue, toString,
 		// push, and pop
-		ArrayList<Integer> a = new ArrayList<Integer>();
+		java.util.Stack<Integer> tester = new java.util.Stack<Integer>();
 		for (int i = 0; i < 10; i++) {
 			s.push(100 + i);
-			a.add(100 + i);
+			tester.add(100 + i);
 		}
-		if (!check(s, a)) {
+		if (!check(s, tester)) {
 			success = false;
 		}
 	}
@@ -33,39 +32,39 @@ public class StackTest {
 			success = false;
 		}
 
-		// Compare Stack with ArrayList to test length, topValue, toString,
+		// Compare Stack with java.util.Stack to test length, topValue, toString,
 		// push, and pop
-		ArrayList<String> a = new ArrayList<String>();
+		java.util.Stack<String> tester = new java.util.Stack<String>();
 		for (int i = 0; i < 10; i++) {
 			s.push("Str" + i);
-			a.add("Str" + i);
+			tester.add("Str" + i);
 		}
-		if (!check(s, a)) {
+		if (!check(s, tester)) {
 			success = false;
 		}
 	}
 
-	static <E> boolean check(lists.Stack<E> s, ArrayList<E> a) {
+	static <E> boolean check(lists.Stack<E> s, java.util.Stack<E> tester) {
 		// Check the length of stack
-		if (s.length() != a.size()) {
+		if (s.length() != tester.size()) {
 			err++;
 			System.err.println("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
-					+ "\nLength expected: " + a.size());
+					+ "\nLength expected: " + tester.size());
 			return false;
 		}
 
 		// Check topValue
-		if (!s.topValue().equals(a.get(a.size() - 1))) {
+		if (!s.topValue().equals(tester.get(tester.size() - 1))) {
 			err++;
 			System.err.println("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
-					+ s.topValue().toString() + "\nValue expected: " + a.get(a.size() - 1).toString());
+					+ s.topValue().toString() + "\nValue expected: " + tester.get(tester.size() - 1).toString());
 			return false;
 		}
 
 		// Check toString
-		StringBuffer out = new StringBuffer(a.size() * 4);
-		for (int i = a.size() - 1; i >= 0; i--) {
-			out.append(a.get(i));
+		StringBuffer out = new StringBuffer(tester.size() * 4);
+		for (int i = tester.size() - 1; i >= 0; i--) {
+			out.append(tester.get(i));
 			out.append(" ");
 		}
 		System.out.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + out.toString());
@@ -78,10 +77,10 @@ public class StackTest {
 		// Check values in stack
 		for (int i = 0; i < s.length(); i++) {
 			E popped = s.pop();
-			if (!popped.equals(a.get(a.size() - i - 1))) {
+			if (!popped.equals(tester.get(tester.size() - i - 1))) {
 				err++;
 				System.err.println("An unexpected value in " + s.getClass() + ". \nPopped from stack: "
-						+ popped.toString() + "\nValue expected: " + a.get(a.size() - i - 1).toString());
+						+ popped.toString() + "\nValue expected: " + tester.get(tester.size() - i - 1).toString());
 				return false;
 			}
 		}
