@@ -2,13 +2,14 @@ package lists;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class StackTest {
 
 	static boolean success = true;
 	static int err = 0;
 
-	static void testInt(Stack<Integer> s) {
+	static void testInt(lists.Stack<Integer> s) {
 		// Check empty stack
 		if (!checkEmp(s)) {
 			success = false;
@@ -26,7 +27,7 @@ public class StackTest {
 		}
 	}
 
-	static void testStr(Stack<String> s) {
+	static void testStr(lists.Stack<String> s) {
 		// Check empty stack
 		if (!checkEmp(s)) {
 			success = false;
@@ -44,7 +45,7 @@ public class StackTest {
 		}
 	}
 
-	static <E> boolean check(Stack<E> s, ArrayList<E> a) {
+	static <E> boolean check(lists.Stack<E> s, ArrayList<E> a) {
 		// Check the length of stack
 		if (s.length() != a.size()) {
 			err++;
@@ -87,7 +88,7 @@ public class StackTest {
 		return true;
 	}
 
-	static <E> boolean checkEmp(Stack<E> s) {
+	static <E> boolean checkEmp(lists.Stack<E> s) {
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
 			err++;
