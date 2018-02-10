@@ -7,6 +7,7 @@ public class StackTest {
 
 	static boolean success = true;
 	static int err = 0;
+	static final int TEST_SIZE = 10;
 
 	static void testInt(lists.Stack<Integer> s) {
 		// Check empty stack
@@ -14,16 +15,17 @@ public class StackTest {
 			success = false;
 		}
 
-		// Compare Stack with java.util.Stack to test length, topValue, toString,
-		// push, and pop
+		// Compare Stack with java.util.Stack to test length, topValue,
+		// toString, push, and pop
 		java.util.Stack<Integer> tester = new java.util.Stack<Integer>();
-		for (int i = 0; i < 10; i++) {
-			s.push(100 + i);
-			tester.add(100 + i);
+		for (int i = 0; i < TEST_SIZE; i++) {
+			// s.push(100 + i);
+			// tester.push(100 + i);
+			if (!check(s, tester, 100 + i)) {
+				success = false;
+			}
 		}
-		if (!check(s, tester)) {
-			success = false;
-		}
+
 	}
 
 	static void testStr(lists.Stack<String> s) {
@@ -32,19 +34,40 @@ public class StackTest {
 			success = false;
 		}
 
-		// Compare Stack with java.util.Stack to test length, topValue, toString,
-		// push, and pop
+		// Compare Stack with java.util.Stack to test length, topValue,
+		// toString, push, and pop
 		java.util.Stack<String> tester = new java.util.Stack<String>();
-		for (int i = 0; i < 10; i++) {
-			s.push("Str" + i);
-			tester.add("Str" + i);
+		for (int i = 0; i < TEST_SIZE; i++) {
+			// s.push("Str" + i);
+			// tester.push("Str" + i);
+			if (!check(s, tester, "Str" + i)) {
+				success = false;
+			}
 		}
-		if (!check(s, tester)) {
-			success = false;
-		}
+
 	}
 
-	static <E> boolean check(lists.Stack<E> s, java.util.Stack<E> tester) {
+	static <E> boolean check(lists.Stack<E> s, java.util.Stack<E> tester, E item) {
+		// Add the item to both stacks
+		s.push(item);
+		tester.push(item);
+
+		// Check toString
+		StringBuffer out = new StringBuffer(tester.size() * 4);
+		for (int i = tester.size() - 1; i >= 0; i--) {
+			out.append(tester.get(i));
+			out.append(" ");
+		}
+		System.out
+				.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + tester.toString()); // TODO
+																															// delete
+																															// later
+		if (!s.toString().equals(out.toString())) {
+			err++;
+			System.err.println("The toString method in " + s.getClass() + " has some errors.");
+			return false;
+		}
+
 		// Check the length of stack
 		if (s.length() != tester.size()) {
 			err++;
@@ -54,35 +77,33 @@ public class StackTest {
 		}
 
 		// Check topValue
-		if (!s.topValue().equals(tester.get(tester.size() - 1))) {
+		if (!s.topValue().equals(tester.peek())) {
 			err++;
 			System.err.println("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
-					+ s.topValue().toString() + "\nValue expected: " + tester.get(tester.size() - 1).toString());
-			return false;
-		}
-
-		// Check toString
-		StringBuffer out = new StringBuffer(tester.size() * 4);
-		for (int i = tester.size() - 1; i >= 0; i--) {
-			out.append(tester.get(i));
-			out.append(" ");
-		}
-		System.out.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + out.toString());
-		if (!s.toString().equals(out.toString())) {
-			err++;
-			System.err.println("The toString method in " + s.getClass() + " has some errors.");
+					+ s.topValue().toString() + "\nValue expected: " + tester.peek().toString());
 			return false;
 		}
 
 		// Check values in stack
-		for (int i = 0; i < s.length(); i++) {
+		java.util.Stack<E> temp = new java.util.Stack<E>();
+		int initLength = s.length();
+		for (int i = 0; i < initLength; i++) {
 			E popped = s.pop();
-			if (!popped.equals(tester.get(tester.size() - i - 1))) {
+			E expected = tester.pop();
+			if (!popped.equals(expected)) {
 				err++;
 				System.err.println("An unexpected value in " + s.getClass() + ". \nPopped from stack: "
-						+ popped.toString() + "\nValue expected: " + tester.get(tester.size() - i - 1).toString());
+						+ popped.toString() + "\nValue expected: " + expected.toString());
 				return false;
 			}
+			temp.push(expected);
+		}
+		
+		// Restore values
+		for (int i = 0; i < initLength; i++) {
+			E popped = temp.pop();
+			s.push(popped);
+			tester.push(popped);
 		}
 		return true;
 	}
