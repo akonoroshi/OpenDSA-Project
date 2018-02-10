@@ -11,43 +11,29 @@ public class StackTest {
 
 	static void testInt(lists.Stack<Integer> s) {
 		// Check empty stack
-		if (!checkEmp(s)) {
-			success = false;
-		}
-
+		checkEmp(s);
+		
 		// Compare Stack with java.util.Stack to test length, topValue,
 		// toString, push, and pop
 		java.util.Stack<Integer> tester = new java.util.Stack<Integer>();
 		for (int i = 0; i < TEST_SIZE; i++) {
-			// s.push(100 + i);
-			// tester.push(100 + i);
-			if (!check(s, tester, 100 + i)) {
-				success = false;
-			}
+			check(s, tester, 100 + i);
 		}
-
 	}
 
 	static void testStr(lists.Stack<String> s) {
 		// Check empty stack
-		if (!checkEmp(s)) {
-			success = false;
-		}
-
+		checkEmp(s);
+		
 		// Compare Stack with java.util.Stack to test length, topValue,
 		// toString, push, and pop
 		java.util.Stack<String> tester = new java.util.Stack<String>();
 		for (int i = 0; i < TEST_SIZE; i++) {
-			// s.push("Str" + i);
-			// tester.push("Str" + i);
-			if (!check(s, tester, "Str" + i)) {
-				success = false;
-			}
+			check(s, tester, "Str" + i);
 		}
-
 	}
 
-	static <E> boolean check(lists.Stack<E> s, java.util.Stack<E> tester, E item) {
+	static <E> void check(lists.Stack<E> s, java.util.Stack<E> tester, E item) {
 		// Add the item to both stacks
 		s.push(item);
 		tester.push(item);
@@ -65,7 +51,7 @@ public class StackTest {
 		if (!s.toString().equals(out.toString())) {
 			err++;
 			System.err.println("The toString method in " + s.getClass() + " has some errors.");
-			return false;
+			success = false;
 		}
 
 		// Check the length of stack
@@ -73,7 +59,7 @@ public class StackTest {
 			err++;
 			System.err.println("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
 					+ "\nLength expected: " + tester.size());
-			return false;
+			success = false;
 		}
 
 		// Check topValue
@@ -81,40 +67,41 @@ public class StackTest {
 			err++;
 			System.err.println("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
 					+ s.topValue().toString() + "\nValue expected: " + tester.peek().toString());
-			return false;
+			success = false;
 		}
 
 		// Check values in stack
 		java.util.Stack<E> temp = new java.util.Stack<E>();
-		int initLength = s.length();
-		for (int i = 0; i < initLength; i++) {
+		int initSize = tester.size();
+		for (int i = 0; i < initSize; i++) {
 			E popped = s.pop();
 			E expected = tester.pop();
 			if (!popped.equals(expected)) {
 				err++;
 				System.err.println("An unexpected value in " + s.getClass() + ". \nPopped from stack: "
 						+ popped.toString() + "\nValue expected: " + expected.toString());
-				return false;
+				success = false;
 			}
 			temp.push(expected);
 		}
 		
 		// Restore values
-		for (int i = 0; i < initLength; i++) {
+		s.clear();
+		tester.clear();
+		for (int i = 0; i < initSize; i++) {
 			E popped = temp.pop();
 			s.push(popped);
 			tester.push(popped);
 		}
-		return true;
 	}
 
-	static <E> boolean checkEmp(lists.Stack<E> s) {
+	static <E> void checkEmp(lists.Stack<E> s) {
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
 			err++;
 			System.err.println("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
 					+ s.topValue().toString() + "\nValue expected: null");
-			return false;
+			success = false;
 		}
 
 		// Test pop with empty stack
@@ -123,7 +110,7 @@ public class StackTest {
 			err++;
 			System.err.println("An unexpected value in empty " + s.getClass() + ". \nPopped from stack: "
 					+ popped.toString() + "\nValue expected: null");
-			return false;
+			success = false;
 		}
 
 		// Test clear
@@ -132,10 +119,8 @@ public class StackTest {
 			err++;
 			System.err.println(
 					"The clear method in " + s.getClass() + " does not work. \nPrinted stack: " + s.toString());
-			return false;
+			success = false;
 		}
-
-		return true;
 	}
 
 	public static void main(String args[]) throws IOException {
