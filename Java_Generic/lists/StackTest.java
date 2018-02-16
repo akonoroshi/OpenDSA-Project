@@ -12,7 +12,7 @@ public class StackTest {
 	static void testInt(lists.Stack<Integer> s) {
 		// Check empty stack
 		checkEmp(s);
-		
+
 		// Compare Stack with java.util.Stack to test length, topValue,
 		// toString, push, and pop
 		java.util.Stack<Integer> tester = new java.util.Stack<Integer>();
@@ -24,7 +24,7 @@ public class StackTest {
 	static void testStr(lists.Stack<String> s) {
 		// Check empty stack
 		checkEmp(s);
-		
+
 		// Compare Stack with java.util.Stack to test length, topValue,
 		// toString, push, and pop
 		java.util.Stack<String> tester = new java.util.Stack<String>();
@@ -37,22 +37,6 @@ public class StackTest {
 		// Add the item to both stacks
 		s.push(item);
 		tester.push(item);
-
-		// Check toString
-		StringBuffer out = new StringBuffer(tester.size() * 4);
-		for (int i = tester.size() - 1; i >= 0; i--) {
-			out.append(tester.get(i));
-			out.append(" ");
-		}
-		System.out
-				.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + tester.toString()); // TODO
-																															// delete
-																															// later
-		if (!s.toString().equals(out.toString())) {
-			err++;
-			System.err.println("The toString method in " + s.getClass() + " has some errors.");
-			success = false;
-		}
 
 		// Check the length of stack
 		if (s.length() != tester.size()) {
@@ -70,6 +54,22 @@ public class StackTest {
 			success = false;
 		}
 
+		// Check toString
+		StringBuffer out = new StringBuffer(tester.size() * 4);
+		for (int i = tester.size() - 1; i >= 0; i--) {
+			out.append(tester.get(i));
+			out.append(" ");
+		}
+		System.out
+				.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + tester.toString()); // TODO
+																															// delete
+																															// later
+		if (!s.toString().equals(out.toString())) {
+			err++;
+			System.err.println("The toString method in " + s.getClass() + " has some errors.");
+			success = false;
+		}
+
 		// Check values in stack
 		java.util.Stack<E> temp = new java.util.Stack<E>();
 		int initSize = tester.size();
@@ -84,7 +84,7 @@ public class StackTest {
 			}
 			temp.push(expected);
 		}
-		
+
 		// Restore values
 		s.clear();
 		tester.clear();
@@ -143,7 +143,7 @@ public class StackTest {
 			output.close();
 			System.out.println("Success!");
 		} else {
-			System.out.println("Testing failed. There are " + err + " error(s) in your codes.");
+			System.out.println("Testing failed. There are(is) " + err + " error(s) in your codes.");
 		}
 	}
 
