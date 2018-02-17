@@ -45,7 +45,7 @@ public class StackTest {
 		}
 
 		// Check topValue
-		if (!s.topValue().equals(tester.peek())) {
+		if (s.topValue() != tester.peek()) {
 			error("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: " + s.topValue().toString()
 					+ "\nValue expected: " + tester.peek().toString());
 		}
