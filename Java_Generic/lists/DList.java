@@ -1,14 +1,14 @@
 package lists;
 // Doubly Linked list implementation
-class LList<E> implements List<E> {
+class DList<E> implements List<E> {
   private DLink<E> head;                    // Pointer to list header
   private DLink<E> tail;                    // Pointer to last element
   private DLink<E> curr;                    // Access to current element
   private int listSize;                    // Size of list
 
   // Constructors
-  LList(int size) { this(); }              // Constructor -- Ignore size
-  LList() { clear(); }
+  DList(int size) { this(); }              // Constructor -- Ignore size
+  DList() { clear(); }
 
   // Remove all elements
   public void clear() {
