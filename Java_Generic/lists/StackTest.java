@@ -40,18 +40,14 @@ public class StackTest {
 
 		// Check the length of stack
 		if (s.length() != tester.size()) {
-			err++;
-			System.err.println("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
+			error("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
 					+ "\nLength expected: " + tester.size());
-			success = false;
 		}
 
 		// Check topValue
 		if (!s.topValue().equals(tester.peek())) {
-			err++;
-			System.err.println("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
-					+ s.topValue().toString() + "\nValue expected: " + tester.peek().toString());
-			success = false;
+			error("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: " + s.topValue().toString()
+					+ "\nValue expected: " + tester.peek().toString());
 		}
 
 		// Check toString
@@ -60,14 +56,9 @@ public class StackTest {
 			out.append(tester.get(i));
 			out.append(" ");
 		}
-		System.out
-				.println("Values in " + s.getClass() + ": " + s.toString() + "\nValues expected: " + tester.toString()); // TODO
-																															// delete
-																															// later
 		if (!s.toString().equals(out.toString())) {
-			err++;
-			System.err.println("The toString method in " + s.getClass() + " has some errors.");
-			success = false;
+			error("The toString method in " + s.getClass() + " has some errors.\nValues in stack: " + s.toString()
+					+ "\nValues expected: " + tester.toString());
 		}
 
 		// Check values in stack
@@ -76,18 +67,14 @@ public class StackTest {
 		for (int i = 0; i < initSize; i++) {
 			E popped = s.pop();
 			E expected = tester.pop();
-			if (!popped.equals(expected)) {
-				err++;
-				System.err.println("An unexpected value in " + s.getClass() + ". \nPopped from stack: "
-						+ popped.toString() + "\nValue expected: " + expected.toString());
-				success = false;
+			if (popped != expected) {
+				error("An unexpected value in " + s.getClass() + ". \nPopped from stack: " + popped.toString()
+						+ "\nValue expected: " + expected.toString());
 			}
 			temp.push(expected);
 		}
 
 		// Restore values
-		s.clear();
-		tester.clear();
 		for (int i = 0; i < initSize; i++) {
 			E popped = temp.pop();
 			s.push(popped);
@@ -98,29 +85,28 @@ public class StackTest {
 	static <E> void checkEmp(lists.Stack<E> s) {
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
-			err++;
-			System.err.println("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
+			error("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
 					+ s.topValue().toString() + "\nValue expected: null");
-			success = false;
 		}
 
 		// Test pop with empty stack
 		E popped = s.pop();
 		if (popped != null) {
-			err++;
-			System.err.println("An unexpected value in empty " + s.getClass() + ". \nPopped from stack: "
-					+ popped.toString() + "\nValue expected: null");
-			success = false;
+			error("An unexpected value in empty " + s.getClass() + ". \nPopped from stack: " + popped.toString()
+					+ "\nValue expected: null");
 		}
 
 		// Test clear
 		s.clear();
 		if (!s.toString().equals("")) {
-			err++;
-			System.err.println(
-					"The clear method in " + s.getClass() + " does not work. \nPrinted stack: " + s.toString());
-			success = false;
+			error("The clear method in " + s.getClass() + " does not work. \nPrinted stack: " + s.toString());
 		}
+	}
+
+	static void error(String message) {
+		err++;
+		success = false;
+		System.err.println("* ***ODSA Error*** *\n" + message);
 	}
 
 	public static void main(String args[]) throws IOException {
