@@ -82,7 +82,7 @@ static <E> void check(Queue<E> q, Deque<E> tester, E item) {
 				+ "\nValues expected: " + tester.toString());
 	}*/
 	System.out.println("[" + q.toString() + "]");
-	System.out.println(tester.toString()); //TODO delete later
+	//System.out.println(tester.toString()); //TODO delete later
 
 	// Check values in queue
 	int initSize = tester.size();
@@ -140,6 +140,9 @@ public static void main(String args[]) throws IOException {
   //test(LQ, LQ1);
   testInt(aq);
   testInt(lq);
+  
+  testStr(aq1);
+  testStr(lq1);
   if (success) {
     PrintWriter output = new PrintWriter("success");
     output.println("Success");
