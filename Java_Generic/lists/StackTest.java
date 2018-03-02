@@ -8,6 +8,8 @@ public class StackTest {
 	static boolean success = true;
 	static int err = 0;
 	static final int TEST_SIZE = 10;
+	static final boolean file = true;
+	static PrintWriter error;
 
 	static void testInt(lists.Stack<Integer> s) {
 		// Check empty stack
@@ -106,10 +108,19 @@ public class StackTest {
 	static void error(String message) {
 		err++;
 		success = false;
-		System.err.println("* ***ODSA Error*** *\n" + message);
+		if (file) {
+			error.println("* ***ODSA Error*** *\n" + message);
+		}
+		else {
+			System.err.println("* ***ODSA Error*** *\n" + message);
+		}
 	}
 
 	public static void main(String args[]) throws IOException {
+		if (file) {
+			error = new PrintWriter("error log");
+		}
+		
 		// Test Integer
 		AStack<Integer> as = new AStack<Integer>();
 		LStack<Integer> ls = new LStack<Integer>();
@@ -130,6 +141,10 @@ public class StackTest {
 			System.out.println("Success!");
 		} else {
 			System.out.println("Testing failed. There are(is) " + err + " error(s) in your codes.");
+		}
+		if (file) {
+			error.flush();
+			error.close();
 		}
 	}
 
