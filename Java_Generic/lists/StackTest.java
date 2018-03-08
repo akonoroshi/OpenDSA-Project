@@ -2,14 +2,13 @@ package lists;
 
 import java.io.*;
 import java.util.Stack;
+import errorInfo.ErrorRec;
 
 public class StackTest {
 
-	static boolean success = true;
 	static int err = 0;
 	static final int TEST_SIZE = 10;
 	static final boolean file = true;
-	static PrintWriter error;
 
 	static void testInt(lists.Stack<Integer> s) {
 		// Check empty stack
@@ -42,14 +41,14 @@ public class StackTest {
 
 		// Check the length of stack
 		if (s.length() != tester.size()) {
-			error("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
-					+ "\nLength expected: " + tester.size());
+			err = ErrorRec.printError("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
+					+ "\nLength expected: " + tester.size(), err, file);
 		}
 
 		// Check topValue
 		if (s.topValue() != tester.peek()) {
-			error("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: " + s.topValue().toString()
-					+ "\nValue expected: " + tester.peek().toString());
+			err = ErrorRec.printError("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
+					+ s.topValue().toString() + "\nValue expected: " + tester.peek().toString(), err, file);
 		}
 
 		// Check toString
@@ -59,8 +58,8 @@ public class StackTest {
 			out.append(" ");
 		}
 		if (!s.toString().equals(out.toString())) {
-			error("The toString method in " + s.getClass() + " has some errors.\nValues in stack: " + s.toString()
-					+ "\nValues expected: " + tester.toString());
+			err = ErrorRec.printError("The toString method in " + s.getClass() + " has some errors.\nValues in stack: "
+					+ s.toString() + "\nValues expected: " + tester.toString(), err, file);
 		}
 
 		// Check values in stack
@@ -70,8 +69,8 @@ public class StackTest {
 			E popped = s.pop();
 			E expected = tester.pop();
 			if (popped != expected) {
-				error("An unexpected value in " + s.getClass() + ". \nPopped from stack: " + popped.toString()
-						+ "\nValue expected: " + expected.toString());
+				err = ErrorRec.printError("An unexpected value in " + s.getClass() + ". \nPopped from stack: "
+						+ popped.toString() + "\nValue expected: " + expected.toString(), i, file);
 			}
 			temp.push(expected);
 		}
@@ -87,40 +86,32 @@ public class StackTest {
 	static <E> void checkEmp(lists.Stack<E> s) {
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
-			error("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
-					+ s.topValue().toString() + "\nValue expected: null");
+			err = ErrorRec.printError("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
+					+ s.topValue().toString() + "\nValue expected: null", err, file);
 		}
 
 		// Test pop with empty stack
 		E popped = s.pop();
 		if (popped != null) {
-			error("An unexpected value in empty " + s.getClass() + ". \nPopped from stack: " + popped.toString()
-					+ "\nValue expected: null");
+			err = ErrorRec.printError("An unexpected value in empty " + s.getClass() + ". \nPopped from stack: "
+					+ popped.toString() + "\nValue expected: null", err, file);
 		}
 
 		// Test clear
 		s.clear();
 		if (!s.toString().equals("")) {
-			error("The clear method in " + s.getClass() + " does not work. \nPrinted stack: " + s.toString());
-		}
-	}
-
-	static void error(String message) {
-		err++;
-		success = false;
-		if (file) {
-			error.println("* ***ODSA Error*** *\n" + message);
-		}
-		else {
-			System.err.println("* ***ODSA Error*** *\n" + message);
+			err = ErrorRec.printError(
+					"The clear method in " + s.getClass() + " does not work. \nPrinted stack: " + s.toString(), err,
+					file);
 		}
 	}
 
 	public static void main(String args[]) throws IOException {
+		// TODO System.setOut
 		if (file) {
-			error = new PrintWriter("error log");
+			ErrorRec.createFile();
 		}
-		
+
 		// Test Integer
 		AStack<Integer> as = new AStack<Integer>();
 		LStack<Integer> ls = new LStack<Integer>();
@@ -133,19 +124,7 @@ public class StackTest {
 		testStr(as1);
 		testStr(ls1);
 
-		if (success) {
-			PrintWriter output = new PrintWriter("success");
-			output.println("Success");
-			output.flush();
-			output.close();
-			System.out.println("Success!");
-		} else {
-			System.out.println("Testing failed. There are(is) " + err + " error(s) in your codes.");
-		}
-		if (file) {
-			error.flush();
-			error.close();
-		}
+		ErrorRec.feedback(err);
 	}
 
 }
