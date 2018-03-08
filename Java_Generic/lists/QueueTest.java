@@ -5,6 +5,13 @@ import java.util.Deque;
 import java.util.LinkedList;
 import errorInfo.ErrorRec;
 
+/**
+ * This program checks if all the methods in AQueue and LQueue classes work
+ * properly.
+ * 
+ * @author Yuya Asano
+ *
+ */
 public class QueueTest {
 
 	static int err = 0;
@@ -102,24 +109,35 @@ public class QueueTest {
 		}
 	}
 
+	/**
+	 * Runs tests on generic AQueue and LQueue Class with Integer and String.
+	 * 
+	 * @param args
+	 *            not used
+	 * @throws IOException
+	 *             thrown if some errors happen while opening or creating a new
+	 *             text file
+	 */
 	public static void main(String args[]) throws IOException {
+		// Create a file to record errors if necessary
 		if (file) {
 			ErrorRec.createFile();
 		}
-		AQueue<Integer> aq = new AQueue<Integer>();
-		AQueue<String> aq1 = new AQueue<String>();
-		LQueue<Integer> lq = new LQueue<Integer>();
-		LQueue<String> lq1 = new LQueue<String>();
 
 		// Test integer
+		AQueue<Integer> aq = new AQueue<Integer>();
+		LQueue<Integer> lq = new LQueue<Integer>();
 		testInt(aq);
 		testInt(lq);
 
 		// Test String
+		AQueue<String> aq1 = new AQueue<String>();
+		LQueue<String> lq1 = new LQueue<String>();
 		testStr(aq1);
 		testStr(lq1);
 
-		ErrorRec.feedback(err);
+		// Get a feedback about the result (success or fail)
+		ErrorRec.feedback(err, file);
 	}
 
 }

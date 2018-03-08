@@ -1,9 +1,15 @@
 package lists;
 
 import java.io.*;
-import java.util.Stack;
 import errorInfo.ErrorRec;
 
+/**
+ * This program checks if all the methods in AStack and LStack classes work
+ * properly.
+ * 
+ * @author Yuya Asano
+ *
+ */
 public class StackTest {
 
 	static int err = 0;
@@ -106,8 +112,17 @@ public class StackTest {
 		}
 	}
 
+	/**
+	 * Runs tests on generic AStack and LStack classes with Integer and String.
+	 * 
+	 * @param args
+	 *            not used
+	 * @throws IOException
+	 *             thrown if some errors happen while opening or creating a new
+	 *             text file
+	 */
 	public static void main(String args[]) throws IOException {
-		// TODO System.setOut
+		// Create a file to record errors if necessary
 		if (file) {
 			ErrorRec.createFile();
 		}
@@ -124,7 +139,8 @@ public class StackTest {
 		testStr(as1);
 		testStr(ls1);
 
-		ErrorRec.feedback(err);
+		// Get a feedback about the result (success or fail)
+		ErrorRec.feedback(err, file);
 	}
 
 }
