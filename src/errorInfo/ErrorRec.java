@@ -4,23 +4,46 @@ import java.io.*;
 
 /**
  * This class deals with actions regarding errors (creating an error log,
- * printing out error messages, and judging success of fail).
+ * printing out error messages, counting the number of errors, and judging
+ * success of fail).
  * 
  * @author Yuya Asano
  *
  */
 public class ErrorRec {
-	static PrintWriter error;
+	// Hold the number of errors
+	static int numErr = 0;
+	// Print error messages in a text file
+	static PrintWriter error = null;
+	// Added at the beginning of error messages
+	final String DEFAULT_MSG = "* ***OpenDSA Error*** *\n";
+	// Added at the beginning of the name of error log file
+	final String FILE_NAME = "error log.";
 
 	/**
-	 * Creates a new text file to record all errors.
-	 * 
+	 * @param useFile
+	 *            true if you want to create a text file to record errors
+	 * @param className
+	 *            name of class used to create a file name
 	 * @throws FileNotFoundException
 	 *             thrown if some errors happen while opening or creating a new
 	 *             text file
 	 */
-	public static void createFile() throws FileNotFoundException {
-		error = new PrintWriter("error log");
+	public ErrorRec(boolean useFile, String className) throws FileNotFoundException {
+		if (useFile) {
+			error = new PrintWriter(FILE_NAME + className);
+		}
+	}
+
+	/**
+	 * @param className
+	 *            name of class used to create a file name
+	 * @throws FileNotFoundException
+	 *             thrown if some errors happen while opening or creating a new
+	 *             text file
+	 */
+	public ErrorRec(String className) throws FileNotFoundException {
+		this(true, className);
 	}
 
 	/**
@@ -29,45 +52,36 @@ public class ErrorRec {
 	 * 
 	 * @param message
 	 *            an error message
-	 * @param err
-	 *            the number of errors
-	 * @param file
-	 *            true if you want to record errors in an error log file
-	 * @return the number of errors incremented by 1
 	 */
-	public static int printError(String message, int err, boolean file) {
-		if (file) {
-			error.println("* ***ODSA Error*** *\n" + message);
+	public void printError(String message) {
+		if (error != null) {
+			error.println(DEFAULT_MSG + message);
 		} else {
-			System.err.println("* ***ODSA Error*** *\n" + message);
+			System.err.println(DEFAULT_MSG + message);
 		}
-		return err + 1;
+		numErr++;
 	}
 
 	/**
 	 * Tells if there exist errors and, if any, prints out the number of errors.
 	 * 
-	 * @param err
-	 *            the number of errors
-	 * @param file
-	 *            true if you want to record errors in an error log file
 	 * @throws FileNotFoundException
 	 *             thrown if some errors happen while opening or creating a new
 	 *             text file
 	 */
-	public static void feedback(int err, boolean file) throws FileNotFoundException {
+	public void feedback() throws FileNotFoundException {
 		// If there is no error, create a success file and print out success. If
 		// not, report the number of errors
-		if (err == 0) {
+		if (numErr == 0) {
 			PrintWriter output = new PrintWriter("success");
 			output.println("Success");
 			output.flush();
 			output.close();
 			System.out.println("Success!");
 		} else {
-			System.out.println("Testing failed. There are(is) " + err + " error(s) in your codes.");
+			System.out.println("Testing failed. There are(is) " + numErr + " error(s) in your codes.");
 		}
-		if (file) {
+		if (error != null) {
 			error.flush();
 			error.close();
 		}

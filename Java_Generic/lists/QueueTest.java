@@ -13,10 +13,13 @@ import errorInfo.ErrorRec;
  *
  */
 public class QueueTest {
-
-	static int err = 0;
+	// The number of items stored in stack during the test
 	static final int TEST_SIZE = 10;
-	static final boolean file = true;
+	// True if you want to create a text file to record errors
+	static final boolean useFile = true;
+	// Instance of ErrorRec class which holds the number of errors and prints
+	// out error messages
+	static ErrorRec record;
 
 	static void testInt(Queue<Integer> q) {
 		// Check empty queue
@@ -45,23 +48,22 @@ public class QueueTest {
 	static <E> void checkEmp(Queue<E> q) {
 		// Test frontValue with empty queue
 		if (q.frontValue() != null) {
-			err = ErrorRec.printError("An unexpected topValue in empty " + q.getClass() + ". \nTopValue in queue: "
-					+ q.frontValue().toString() + "\nValue expected: null", err, file);
+			record.printError("An unexpected topValue in empty " + q.getClass() + ". \nTopValue in queue: "
+					+ q.frontValue().toString() + "\nValue expected: null");
 		}
 
 		// Test dequeue with empty queue
 		E dequeued = q.dequeue();
 		if (dequeued != null) {
-			err = ErrorRec.printError("An unexpected value in empty " + q.getClass() + ". \nDequeued from queue: "
-					+ dequeued.toString() + "\nValue expected: null", err, file);
+			record.printError("An unexpected value in empty " + q.getClass() + ". \nDequeued from queue: "
+					+ dequeued.toString() + "\nValue expected: null");
 		}
 
 		// Test clear
 		q.clear();
 		if (!q.toString().equals("")) {
-			err = ErrorRec.printError(
-					"The clear method in " + q.getClass() + " does not work. \nPrinted queue: " + q.toString(), err,
-					file);
+			record.printError(
+					"The clear method in " + q.getClass() + " does not work. \nPrinted queue: " + q.toString());
 		}
 	}
 
@@ -72,14 +74,14 @@ public class QueueTest {
 
 		// Check the length of queue
 		if (q.length() != tester.size()) {
-			err = ErrorRec.printError("An unexpected length of " + q.getClass() + ". \nLength of queue: " + q.length()
-					+ "\nLength expected: " + tester.size(), err, file);
+			record.printError("An unexpected length of " + q.getClass() + ". \nLength of queue: " + q.length()
+					+ "\nLength expected: " + tester.size());
 		}
 
 		// Check frontValue
 		if (!q.frontValue().equals(tester.peekFirst())) {
-			err = ErrorRec.printError("An unexpected topValue " + q.getClass() + ". \nTopValue in queue: "
-					+ q.frontValue().toString() + "\nValue expected: " + tester.peekFirst().toString(), err, file);
+			record.printError("An unexpected topValue " + q.getClass() + ". \nTopValue in queue: "
+					+ q.frontValue().toString() + "\nValue expected: " + tester.peekFirst().toString());
 		}
 
 		// Check toString
@@ -91,8 +93,8 @@ public class QueueTest {
 			out.append(" ");
 		}
 		if (!q.toString().equals(out.toString())) {
-			err = ErrorRec.printError("The toString method in " + q.getClass() + " has some errors.\nValues in queue: "
-					+ q.toString() + "\nValues expected: " + out.toString(), err, file);
+			record.printError("The toString method in " + q.getClass() + " has some errors.\nValues in queue: "
+					+ q.toString() + "\nValues expected: " + out.toString());
 		}
 
 		// Check values in queue
@@ -100,8 +102,8 @@ public class QueueTest {
 			E dequeued = q.dequeue();
 			E expected = tester.pollFirst();
 			if (dequeued != expected) {
-				err = ErrorRec.printError("An unexpected value in " + q.getClass() + ". \nPopped from queue: "
-						+ dequeued.toString() + "\nValue expected: " + expected.toString(), i, file);
+				record.printError("An unexpected value in " + q.getClass() + ". \nPopped from queue: "
+						+ dequeued.toString() + "\nValue expected: " + expected.toString());
 			}
 			// Restore values
 			q.enqueue(expected);
@@ -120,9 +122,7 @@ public class QueueTest {
 	 */
 	public static void main(String args[]) throws IOException {
 		// Create a file to record errors if necessary
-		if (file) {
-			ErrorRec.createFile();
-		}
+		record = new ErrorRec(useFile, "QueueTest");
 
 		// Test integer
 		AQueue<Integer> aq = new AQueue<Integer>();
@@ -137,7 +137,6 @@ public class QueueTest {
 		testStr(lq1);
 
 		// Get a feedback about the result (success or fail)
-		ErrorRec.feedback(err, file);
+		record.feedback();
 	}
-
 }

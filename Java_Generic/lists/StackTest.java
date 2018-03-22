@@ -11,10 +11,13 @@ import errorInfo.ErrorRec;
  *
  */
 public class StackTest {
-
-	static int err = 0;
+	// The number of items stored in stack during the test
 	static final int TEST_SIZE = 10;
-	static final boolean file = true;
+	// True if you want to create a text file to record errors
+	static final boolean useFile = true;
+	// Instance of ErrorRec class which holds the number of errors and prints
+	// out error messages
+	static ErrorRec record;
 
 	static void testInt(lists.Stack<Integer> s) {
 		// Check empty stack
@@ -47,14 +50,14 @@ public class StackTest {
 
 		// Check the length of stack
 		if (s.length() != tester.size()) {
-			err = ErrorRec.printError("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
-					+ "\nLength expected: " + tester.size(), err, file);
+			record.printError("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
+					+ "\nLength expected: " + tester.size());
 		}
 
 		// Check topValue
 		if (s.topValue() != tester.peek()) {
-			err = ErrorRec.printError("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
-					+ s.topValue().toString() + "\nValue expected: " + tester.peek().toString(), err, file);
+			record.printError("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
+					+ s.topValue().toString() + "\nValue expected: " + tester.peek().toString());
 		}
 
 		// Check toString
@@ -64,8 +67,8 @@ public class StackTest {
 			out.append(" ");
 		}
 		if (!s.toString().equals(out.toString())) {
-			err = ErrorRec.printError("The toString method in " + s.getClass() + " has some errors.\nValues in stack: "
-					+ s.toString() + "\nValues expected: " + tester.toString(), err, file);
+			record.printError("The toString method in " + s.getClass() + " has some errors.\nValues in stack: "
+					+ s.toString() + "\nValues expected: " + tester.toString());
 		}
 
 		// Check values in stack
@@ -75,8 +78,8 @@ public class StackTest {
 			E popped = s.pop();
 			E expected = tester.pop();
 			if (popped != expected) {
-				err = ErrorRec.printError("An unexpected value in " + s.getClass() + ". \nPopped from stack: "
-						+ popped.toString() + "\nValue expected: " + expected.toString(), i, file);
+				record.printError("An unexpected value in " + s.getClass() + ". \nPopped from stack: "
+						+ popped.toString() + "\nValue expected: " + expected.toString());
 			}
 			temp.push(expected);
 		}
@@ -92,23 +95,22 @@ public class StackTest {
 	static <E> void checkEmp(lists.Stack<E> s) {
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
-			err = ErrorRec.printError("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
-					+ s.topValue().toString() + "\nValue expected: null", err, file);
+			record.printError("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
+					+ s.topValue().toString() + "\nValue expected: null");
 		}
 
 		// Test pop with empty stack
 		E popped = s.pop();
 		if (popped != null) {
-			err = ErrorRec.printError("An unexpected value in empty " + s.getClass() + ". \nPopped from stack: "
-					+ popped.toString() + "\nValue expected: null", err, file);
+			record.printError("An unexpected value in empty " + s.getClass() + ". \nPopped from stack: "
+					+ popped.toString() + "\nValue expected: null");
 		}
 
 		// Test clear
 		s.clear();
 		if (!s.toString().equals("")) {
-			err = ErrorRec.printError(
-					"The clear method in " + s.getClass() + " does not work. \nPrinted stack: " + s.toString(), err,
-					file);
+			record.printError(
+					"The clear method in " + s.getClass() + " does not work. \nPrinted stack: " + s.toString());
 		}
 	}
 
@@ -119,13 +121,11 @@ public class StackTest {
 	 *            not used
 	 * @throws IOException
 	 *             thrown if some errors happen while opening or creating a new
-	 *             text file
+	 *             text useFile
 	 */
 	public static void main(String args[]) throws IOException {
-		// Create a file to record errors if necessary
-		if (file) {
-			ErrorRec.createFile();
-		}
+		// Create a useFile to record errors if necessary
+		record = new ErrorRec(useFile, "StackTest");
 
 		// Test Integer
 		AStack<Integer> as = new AStack<Integer>();
@@ -140,7 +140,6 @@ public class StackTest {
 		testStr(ls1);
 
 		// Get a feedback about the result (success or fail)
-		ErrorRec.feedback(err, file);
+		record.feedback();
 	}
-
 }
