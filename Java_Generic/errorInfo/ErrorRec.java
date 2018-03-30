@@ -12,13 +12,13 @@ import java.io.*;
  */
 public class ErrorRec {
 	// Hold the number of errors
-	static int numErr = 0;
+	int numErr = 0;
 	// Print error messages in a text file
-	static PrintWriter error = null;
+	PrintWriter error = null;
 	// Added at the beginning of error messages
-	final String DEFAULT_MSG = "* ***OpenDSA Error*** *\n";
+	static final String DEFAULT_MSG = "* ***OpenDSA Error*** *\n";
 	// Added at the beginning of the name of error log file
-	final String FILE_NAME = "error log.";
+	static final String FILE_NAME = "error log.";
 
 	/**
 	 * @param useFile

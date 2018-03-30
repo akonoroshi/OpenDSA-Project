@@ -79,7 +79,7 @@ public class QueueTest {
 		}
 
 		// Check frontValue
-		if (!q.frontValue().equals(tester.peekFirst())) {
+		if (q.frontValue() != tester.peekFirst()) {
 			record.printError("An unexpected topValue " + q.getClass() + ". \nTopValue in queue: "
 					+ q.frontValue().toString() + "\nValue expected: " + tester.peekFirst().toString());
 		}

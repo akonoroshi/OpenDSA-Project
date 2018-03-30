@@ -1,0 +1,6 @@
+* ***OpenDSA Error*** *
+The clear method in class lists.AList does not work. 
+Printed queue: lists.AList@33909752
+* ***OpenDSA Error*** *
+The clear method in class lists.LList does not work. 
+Printed queue: lists.LList@55f96302
