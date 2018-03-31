@@ -44,7 +44,7 @@ class LList<E> implements List<E> {
 
 /* *** ODSATag: LListRemove *** */
   // Remove and return current element
-  public E remove () {
+  public E remove() {
     if (curr == tail) return null;          // Nothing to remove
     E it = curr.element();                  // Remember value
     curr.setElement(curr.next().element()); // Pull forward the next element
@@ -89,7 +89,8 @@ class LList<E> implements List<E> {
 /* *** ODSATag: LListPos *** */
   // Move down list to "pos" position
   public boolean moveToPos(int pos) {
-    if ((pos < 0) || (pos > listSize)) return false;
+	// TODO pos >= listSize
+    if ((pos < 0) || (pos >= listSize)) return false;
     curr = head.next();
     for(int i=0; i<pos; i++) curr = curr.next();
     return true;
@@ -103,5 +104,25 @@ class LList<E> implements List<E> {
   public E getValue() {
     return curr.element();
   }
+  
+  public String toString() {
+		Link<E> temp = head.next();
+		StringBuffer out = new StringBuffer((listSize + 1) * 4);
+
+		out.append("< ");
+		for (int i = 0; i < currPos(); i++) {
+			out.append(temp.element());
+			out.append(" ");
+			temp = temp.next();
+		}
+		out.append("| ");
+		for (int i = currPos(); i < listSize; i++) {
+			out.append(temp.element());
+			out.append(" ");
+			temp = temp.next();
+		}
+		out.append(">");
+		return out.toString();
+	}
 }
 /* *** ODSAendTag: LList *** */
