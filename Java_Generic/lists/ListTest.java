@@ -7,7 +7,7 @@ import errorInfo.ErrorRec;
 
 public class ListTest {
 	// The number of items stored in stack during the test
-	static final int TEST_SIZE = 10;
+	static final int TEST_SIZE = 8;
 	// True if you want to create a text file to record errors
 	static final boolean useFile = true;
 	// Instance of ErrorRec class which holds the number of errors and prints
@@ -39,11 +39,12 @@ public class ListTest {
 			checkIns(l, tester, 100 + i);
 		}
 
-		l.clear();
-		tester.clear();
+		reset(l, tester);
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkApp(l, tester, 100 + i);
 		}
+
+		doSomethingOnNonEmpList(l, tester);
 	}
 
 	static void testStr(List<String> l) {
@@ -59,11 +60,17 @@ public class ListTest {
 			checkIns(l, tester, "Str" + i);
 		}
 
-		l.clear();
-		tester.clear();
+		reset(l, tester);
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkApp(l, tester, "Str" + i);
 		}
+
+		doSomethingOnNonEmpList(l, tester);
+	}
+
+	static <E> void reset(List<E> l, AbstractList<E> tester) {
+		l.clear();
+		tester.clear();
 	}
 
 	static <E> void doSomethingOnEmpList(List<E> l) {
@@ -93,9 +100,10 @@ public class ListTest {
 		if (l.moveToPos(-1)) {
 			record.printError("An empty " + l.getClass() + " returned true for moveToPos(-1)");
 		}
-		if (l.moveToPos(0)) {
-			record.printError("An empty " + l.getClass() + " returned true for moveToPos(0)");
-		}
+		/*
+		 * if (l.moveToPos(0)) { record.printError("An empty " + l.getClass() +
+		 * " returned true for moveToPos(0)"); }
+		 */
 
 		// Test clear
 		l.clear();
@@ -105,18 +113,50 @@ public class ListTest {
 		}
 	}
 
+	static <E> void doSomethingOnNonEmpList(List<E> l, AbstractList<E> tester) {
+		// Test moveToEnd
+		l.moveToEnd();
+		l.prev();
+		check(l, tester, l.length() - 1);
+
+		// Remove the last item
+		E removed = l.remove();
+		E expected = tester.remove(tester.size() - 1);
+		if (removed != expected) {
+			record.printError("Unexpected removed value at the end of " + l.getClass() + ".\nRemoved value: " + removed
+					+ "\nExpected value: " + expected);
+		}
+		l.prev();
+		check(l, tester, l.length() - 1);
+		l.append(expected);
+		tester.add(expected);
+
+		// Remove the first item
+		l.moveToStart();
+		removed = l.remove();
+		expected = tester.remove(0);
+		if (removed != expected) {
+			record.printError("Unexpected removed value at the beginning of " + l.getClass() + ".\nRemoved value: "
+					+ removed + "\nExpected value: " + expected);
+		}
+		check(l, tester, 0);
+		l.insert(expected);
+		tester.add(0, expected);
+
+	}
+
 	static <E> void checkIns(List<E> l, AbstractList<E> tester, E item) {
 		// Insert the item to both queues
 		tester.add(l.currPos(), item);
 		l.insert(item);
-		check(l, tester, 0);
+		check(l, tester, l.currPos());
 	}
 
 	static <E> void checkApp(List<E> l, AbstractList<E> tester, E item) {
 		// Append the item to both queues
 		tester.add(item);
 		l.append(item);
-		check(l, tester, 0);
+		check(l, tester, l.currPos());
 	}
 
 	static <E> void check(List<E> l, AbstractList<E> tester, int curr) {
@@ -133,20 +173,20 @@ public class ListTest {
 		}
 
 		// Check the value stored in the current position
-		if (l.getValue() != tester.get(l.currPos())) {
+		if (l.getValue() != tester.get(curr)) {
 			record.printError("An unexpected topValue " + l.getClass() + ". \nTopValue in queue: "
-					+ l.getValue().toString() + "\nValue expected: " + tester.get(l.currPos()).toString());
+					+ l.getValue().toString() + "\nValue expected: " + tester.get(curr).toString());
 		}
 
 		// Check toString
 		StringBuffer out = new StringBuffer(tester.size() * 4);
 		out.append("< ");
-		for (int i = 0; i < l.currPos(); i++) {
+		for (int i = 0; i < curr; i++) {
 			out.append(tester.get(i));
 			out.append(" ");
 		}
 		out.append("| ");
-		for (int i = l.currPos(); i < tester.size(); i++) {
+		for (int i = curr; i < tester.size(); i++) {
 			out.append(tester.get(i));
 			out.append(" ");
 		}
@@ -156,18 +196,21 @@ public class ListTest {
 					+ l.toString() + "\nValues expected: " + out.toString());
 		}
 
-		// Check values in queue FIXME
+		// Check values in queue
+		l.moveToStart();
 		for (int i = 0; i < tester.size(); i++) {
-			E expected = tester.remove(l.currPos());
+			E expected = tester.remove(i);
 			E removed = l.remove();
 			if (removed != expected) {
 				record.printError("An unexpected value in " + l.getClass() + ". \nPopped from queue: "
 						+ removed.toString() + "\nValue expected: " + expected.toString());
 			}
 			// Restore values
-			tester.add(l.currPos(), expected);
+			tester.add(i, expected);
 			l.insert(expected);
+			l.next();
 		}
+		l.moveToPos(curr);
 	}
 
 	public static void main(String args[]) throws IOException {

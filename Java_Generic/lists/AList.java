@@ -68,7 +68,7 @@ class AList<E> implements List<E> {
   // Set current list position to "pos"
   public boolean moveToPos(int pos) {
 	// TODO pos >= listSize
-    if ((pos < 0) || (pos >= listSize)) return false;
+    if ((pos < 0) || (pos > listSize)) return false;
     curr = pos;
     return true;
   }

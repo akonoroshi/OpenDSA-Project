@@ -90,7 +90,7 @@ class LList<E> implements List<E> {
   // Move down list to "pos" position
   public boolean moveToPos(int pos) {
 	// TODO pos >= listSize
-    if ((pos < 0) || (pos >= listSize)) return false;
+    if ((pos < 0) || (pos > listSize)) return false;
     curr = head.next();
     for(int i=0; i<pos; i++) curr = curr.next();
     return true;
