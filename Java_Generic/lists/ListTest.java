@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.AbstractList;
 import java.util.LinkedList;
 import errorInfo.ErrorRec;
+import java.lang.Math;
 
 public class ListTest {
 	// The number of items stored in stack during the test
@@ -27,13 +28,13 @@ public class ListTest {
 	/* *** ODSAendTag: listfind *** */
 
 	static void testInt(List<Integer> l) {
-		// Check empty queue
+		// Check empty list
 		checkEmp(l);
 
 		doSomethingOnEmpList(l);
 
-		// Compare Queue with java.util.Queue to test length, frontValue,
-		// toString, enqueue, and dequeue
+		// Compare list with java.util.list to test length, frontValue,
+		// toString, enlist, and delist
 		AbstractList<Integer> tester = new LinkedList<Integer>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkIns(l, tester, 100 + i);
@@ -48,13 +49,13 @@ public class ListTest {
 	}
 
 	static void testStr(List<String> l) {
-		// Check empty queue
+		// Check empty list
 		checkEmp(l);
 
 		doSomethingOnEmpList(l);
 
-		// Compare Queue with java.util.Queue to test length, frontValue,
-		// toString, enqueue, and dequeue
+		// Compare list with java.util.list to test length, frontValue,
+		// toString, enlist, and delist
 		AbstractList<String> tester = new LinkedList<String>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkIns(l, tester, "Str" + i);
@@ -83,16 +84,16 @@ public class ListTest {
 	}
 
 	static <E> void checkEmp(List<E> l) {
-		// Test frontValue with empty queue
+		// Test frontValue with empty list
 		if (l.currPos() != 0) {
-			record.printError("An unexpected topValue in empty " + l.getClass() + ". \nTopValue in queue: "
-					+ l.currPos() + "\nValue expected: 0");
+			record.printError("An unexpected topValue in empty " + l.getClass() + ". \nTopValue in list: " + l.currPos()
+					+ "\nValue expected: 0");
 		}
 
-		// Test dequeue with empty queue
+		// Test delist with empty list
 		E removed = l.remove();
 		if (removed != null) {
-			record.printError("An unexpected value in empty " + l.getClass() + ". \nDequeued from queue: "
+			record.printError("An unexpected value in empty " + l.getClass() + ". \nDelistd from list: "
 					+ removed.toString() + "\nValue expected: null");
 		}
 
@@ -100,16 +101,12 @@ public class ListTest {
 		if (l.moveToPos(-1)) {
 			record.printError("An empty " + l.getClass() + " returned true for moveToPos(-1)");
 		}
-		/*
-		 * if (l.moveToPos(0)) { record.printError("An empty " + l.getClass() +
-		 * " returned true for moveToPos(0)"); }
-		 */
 
 		// Test clear
 		l.clear();
 		if (!l.toString().equals("< | >")) {
 			record.printError(
-					"The clear method in " + l.getClass() + " does not work. \nPrinted queue: " + l.toString());
+					"The clear method in " + l.getClass() + " does not work. \nPrinted list: " + l.toString());
 		}
 	}
 
@@ -119,50 +116,51 @@ public class ListTest {
 		l.prev();
 		check(l, tester, l.length() - 1);
 
-		// Remove the last item
-		E removed = l.remove();
-		E expected = tester.remove(tester.size() - 1);
-		if (removed != expected) {
-			record.printError("Unexpected removed value at the end of " + l.getClass() + ".\nRemoved value: " + removed
-					+ "\nExpected value: " + expected);
-		}
-		l.prev();
-		check(l, tester, l.length() - 1);
-		l.append(expected);
-		tester.add(expected);
-
-		// Remove the first item
+		// Test moveToStart
 		l.moveToStart();
-		removed = l.remove();
-		expected = tester.remove(0);
-		if (removed != expected) {
-			record.printError("Unexpected removed value at the beginning of " + l.getClass() + ".\nRemoved value: "
-					+ removed + "\nExpected value: " + expected);
-		}
 		check(l, tester, 0);
-		l.insert(expected);
-		tester.add(0, expected);
-
+		
+		// Keep removing items from the middle of the list
+		int curr = l.length() / 2;
+		for (int i = 0; i < l.length(); i++) {
+			curr = (int) (curr + i * Math.pow(-1, i));
+			l.moveToPos(curr);
+			E removed = l.remove();
+			E expected = tester.remove(curr);
+			if (removed != expected) {
+				record.printError("Unexpected removed value in the middle of " + l.getClass() + ".\nRemoved value: "
+						+ removed + "\nExpected value: " + expected);
+			}
+			if (l.isAtEnd()) {
+				l.prev();
+				check(l, tester, curr - 1);
+				l.next();
+			} else {
+				check(l, tester, curr);
+			}
+			l.insert(expected);
+			tester.add(curr, expected);
+		}
 	}
 
 	static <E> void checkIns(List<E> l, AbstractList<E> tester, E item) {
-		// Insert the item to both queues
+		// Insert the item to both lists
 		tester.add(l.currPos(), item);
 		l.insert(item);
 		check(l, tester, l.currPos());
 	}
 
 	static <E> void checkApp(List<E> l, AbstractList<E> tester, E item) {
-		// Append the item to both queues
+		// Append the item to both lists
 		tester.add(item);
 		l.append(item);
 		check(l, tester, l.currPos());
 	}
 
 	static <E> void check(List<E> l, AbstractList<E> tester, int curr) {
-		// Check the length of queue
+		// Check the length of list
 		if (l.length() != tester.size()) {
-			record.printError("An unexpected length of " + l.getClass() + ". \nLength of queue: " + l.length()
+			record.printError("An unexpected length of " + l.getClass() + ". \nLength of list: " + l.length()
 					+ "\nLength expected: " + tester.size());
 		}
 
@@ -174,7 +172,7 @@ public class ListTest {
 
 		// Check the value stored in the current position
 		if (l.getValue() != tester.get(curr)) {
-			record.printError("An unexpected topValue " + l.getClass() + ". \nTopValue in queue: "
+			record.printError("An unexpected topValue " + l.getClass() + ". \nTopValue in list: "
 					+ l.getValue().toString() + "\nValue expected: " + tester.get(curr).toString());
 		}
 
@@ -192,17 +190,17 @@ public class ListTest {
 		}
 		out.append(">");
 		if (!l.toString().equals(out.toString())) {
-			record.printError("The toString method in " + l.getClass() + " has some errors.\nValues in queue: "
+			record.printError("The toString method in " + l.getClass() + " has some errors.\nValues in list: "
 					+ l.toString() + "\nValues expected: " + out.toString());
 		}
 
-		// Check values in queue
+		// Check values in list
 		l.moveToStart();
 		for (int i = 0; i < tester.size(); i++) {
 			E expected = tester.remove(i);
 			E removed = l.remove();
 			if (removed != expected) {
-				record.printError("An unexpected value in " + l.getClass() + ". \nPopped from queue: "
+				record.printError("An unexpected value in " + l.getClass() + ". \nPopped from list: "
 						+ removed.toString() + "\nValue expected: " + expected.toString());
 			}
 			// Restore values
@@ -219,13 +217,17 @@ public class ListTest {
 
 		AList<Integer> al = new AList<Integer>();
 		LList<Integer> ll = new LList<Integer>();
+		DList<Integer> dl = new DList<Integer>();
 		testInt(al);
 		testInt(ll);
+		testInt(dl);
 
 		AList<String> al1 = new AList<String>();
 		LList<String> ll1 = new LList<String>();
+		DList<String> dl1 = new DList<String>();
 		testStr(al1);
 		testStr(ll1);
+		testStr(dl1);
 
 		// Get a feedback about the result (success or fail)
 		record.feedback();
