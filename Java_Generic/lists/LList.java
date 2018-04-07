@@ -106,23 +106,23 @@ class LList<E> implements List<E> {
   }
   
   public String toString() {
-		Link<E> temp = head.next();
-		StringBuffer out = new StringBuffer((listSize + 1) * 4);
+	Link<E> temp = head.next();
+	StringBuffer out = new StringBuffer((listSize + 1) * 4);
 
-		out.append("< ");
-		for (int i = 0; i < currPos(); i++) {
-			out.append(temp.element());
-			out.append(" ");
-			temp = temp.next();
-		}
-		out.append("| ");
-		for (int i = currPos(); i < listSize; i++) {
-			out.append(temp.element());
-			out.append(" ");
-			temp = temp.next();
-		}
-		out.append(">");
-		return out.toString();
+	out.append("< ");
+	for (int i = 0; i < currPos(); i++) {
+		out.append(temp.element());
+		out.append(" ");
+		temp = temp.next();
 	}
+	out.append("| ");
+	for (int i = currPos(); i < listSize; i++) {
+		out.append(temp.element());
+		out.append(" ");
+		temp = temp.next();
+	}
+	out.append(">");
+	return out.toString();
+  }
 }
 /* *** ODSAendTag: LList *** */

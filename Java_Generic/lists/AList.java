@@ -67,7 +67,6 @@ class AList<E> implements List<E> {
 
   // Set current list position to "pos"
   public boolean moveToPos(int pos) {
-	// TODO pos >= listSize
     if ((pos < 0) || (pos > listSize)) return false;
     curr = pos;
     return true;
@@ -84,20 +83,20 @@ class AList<E> implements List<E> {
   }
   
   public String toString() {
-		StringBuffer out = new StringBuffer((listSize + 1) * 4);
+	StringBuffer out = new StringBuffer((listSize + 1) * 4);
 
-		out.append("< ");
-		for (int i = 0; i < curr; i++) {
-			out.append(listArray[i]);
-			out.append(" ");
-		}
-		out.append("| ");
-		for (int i = curr; i < listSize; i++) {
-			out.append(listArray[i]);
-			out.append(" ");
-		}
-		out.append(">");
-		return out.toString();
+	out.append("< ");
+	for (int i = 0; i < curr; i++) {
+		out.append(listArray[i]);
+		out.append(" ");
 	}
+	out.append("| ");
+	for (int i = curr; i < listSize; i++) {
+		out.append(listArray[i]);
+		out.append(" ");
+	}
+	out.append(">");
+	return out.toString();
+  }
 }
 /* *** ODSAendTag: AList *** */

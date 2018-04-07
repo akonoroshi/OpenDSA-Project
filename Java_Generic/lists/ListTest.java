@@ -1,14 +1,19 @@
 package lists;
 
 import java.io.*;
-import java.util.AbstractList;
 import java.util.LinkedList;
 import errorInfo.ErrorRec;
-import java.lang.Math;
 
+/**
+ * This program checks if all the methods in AList, LList and DList classes work
+ * properly.
+ * 
+ * @author Yuya Asano
+ *
+ */
 public class ListTest {
 	// The number of items stored in stack during the test
-	static final int TEST_SIZE = 8;
+	static final int TEST_SIZE = 9;
 	// True if you want to create a text file to record errors
 	static final boolean useFile = true;
 	// Instance of ErrorRec class which holds the number of errors and prints
@@ -31,16 +36,21 @@ public class ListTest {
 		// Check empty list
 		checkEmp(l);
 
+		// Test moveToStart, moveToEnd, prev, and next
 		doSomethingOnEmpList(l);
 
-		// Compare list with java.util.list to test length, frontValue,
-		// toString, enlist, and delist
-		AbstractList<Integer> tester = new LinkedList<Integer>();
+		// Compare list with java.util.list to test length, getValue,
+		// toString, currPos, and remove. Add items by inserting
+		LinkedList<Integer> tester = new LinkedList<Integer>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkIns(l, tester, 100 + i);
 		}
 
+		// Clear both lists
 		reset(l, tester);
+
+		// Compare list with java.util.list to test length, getValue,
+		// toString, currPos, and remove. Add items by appending
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkApp(l, tester, 100 + i);
 		}
@@ -52,16 +62,21 @@ public class ListTest {
 		// Check empty list
 		checkEmp(l);
 
+		// Test moveToStart, moveToEnd, prev, and next
 		doSomethingOnEmpList(l);
 
-		// Compare list with java.util.list to test length, frontValue,
-		// toString, enlist, and delist
-		AbstractList<String> tester = new LinkedList<String>();
+		// Compare list with java.util.list to test length, getValue,
+		// toString, currPos, and remove. Add items by inserting
+		LinkedList<String> tester = new LinkedList<String>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkIns(l, tester, "Str" + i);
 		}
 
+		// Clear both lists
 		reset(l, tester);
+
+		// Compare list with java.util.list to test length, getValue,
+		// toString, currPos, and remove. Add items by appending
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkApp(l, tester, "Str" + i);
 		}
@@ -69,7 +84,7 @@ public class ListTest {
 		doSomethingOnNonEmpList(l, tester);
 	}
 
-	static <E> void reset(List<E> l, AbstractList<E> tester) {
+	static <E> void reset(List<E> l, LinkedList<E> tester) {
 		l.clear();
 		tester.clear();
 	}
@@ -84,13 +99,13 @@ public class ListTest {
 	}
 
 	static <E> void checkEmp(List<E> l) {
-		// Test frontValue with empty list
+		// Test currPos with empty list
 		if (l.currPos() != 0) {
 			record.printError("An unexpected topValue in empty " + l.getClass() + ". \nTopValue in list: " + l.currPos()
 					+ "\nValue expected: 0");
 		}
 
-		// Test delist with empty list
+		// Test remove with empty list
 		E removed = l.remove();
 		if (removed != null) {
 			record.printError("An unexpected value in empty " + l.getClass() + ". \nDelistd from list: "
@@ -110,54 +125,101 @@ public class ListTest {
 		}
 	}
 
-	static <E> void doSomethingOnNonEmpList(List<E> l, AbstractList<E> tester) {
-		// Test moveToEnd
-		l.moveToEnd();
-		l.prev();
-		check(l, tester, l.length() - 1);
-
-		// Test moveToStart
+	static <E> void doSomethingOnNonEmpList(List<E> l, LinkedList<E> tester) {
+		// Test moveToStart and remove
 		l.moveToStart();
 		check(l, tester, 0);
-		
+		E removed = l.remove();
+		E expected = tester.remove(0);
+		if (removed != expected) {
+			record.printError("Unexpected removed value at the beginning of " + l.getClass() + ".\nRemoved value: "
+					+ removed + "\nExpected value: " + expected);
+		}
+		check(l, tester, 0);
+		// Restore values
+		l.insert(expected);
+		tester.addFirst(expected);
+
+		// Test prev
+		l.prev();
+		check(l, tester, 0);
+
+		// Test next
+		l.next();
+		check(l, tester, 1);
+
+		// Test moveToEnd and remove
+		l.moveToEnd();
+		// Curr is out of bound
+		l.prev();
+		check(l, tester, tester.size() - 1);
+		removed = l.remove();
+		expected = tester.remove(tester.size() - 1);
+		if (removed != expected) {
+			record.printError("Unexpected removed value at the end of " + l.getClass() + ".\nRemoved value: " + removed
+					+ "\nExpected value: " + expected);
+		}
+		// Curr is out of bound
+		l.prev();
+		check(l, tester, tester.size() - 1);
+		// Restore values
+		l.append(expected);
+		tester.addLast(expected);
+
 		// Keep removing items from the middle of the list
-		int curr = l.length() / 2;
-		for (int i = 0; i < l.length(); i++) {
-			curr = (int) (curr + i * Math.pow(-1, i));
-			l.moveToPos(curr);
-			E removed = l.remove();
-			E expected = tester.remove(curr);
+		LinkedList<E> temp = new LinkedList<E>();
+		int size = tester.size();
+		int curr = size / 2;
+		l.moveToPos(curr);
+		for (int i = 0; i < size; i++) {
+			removed = l.remove();
+			expected = tester.remove(curr);
 			if (removed != expected) {
-				record.printError("Unexpected removed value in the middle of " + l.getClass() + ".\nRemoved value: "
-						+ removed + "\nExpected value: " + expected);
+				record.printError("Unexpected removed value at the index of " + curr + " in " + l.getClass()
+						+ ".\nRemoved value: " + removed + "\nExpected value: " + expected);
 			}
-			if (l.isAtEnd()) {
+			// If the lists are empty, call checkEmp. If curr is at tail, it is out of bound
+			if (tester.isEmpty()) {
+				checkEmp(l);
+			} else if (l.isAtEnd()) {
 				l.prev();
 				check(l, tester, curr - 1);
 				l.next();
 			} else {
 				check(l, tester, curr);
 			}
-			l.insert(expected);
-			tester.add(curr, expected);
+			// If this is the even-number-th removal, decrease current position by one
+			if (i % 2 == 0) {
+				temp.addLast(expected);
+				l.prev();
+				curr--;
+			} else {
+				temp.addFirst(expected);
+			}
+		}
+		// Restore values
+		for (int i = 0; i < size; i++) {
+			E tempRem = temp.removeFirst();
+			l.append(tempRem);
+			tester.add(tempRem);
 		}
 	}
 
-	static <E> void checkIns(List<E> l, AbstractList<E> tester, E item) {
+	static <E> void checkIns(List<E> l, LinkedList<E> tester, E item) {
 		// Insert the item to both lists
 		tester.add(l.currPos(), item);
 		l.insert(item);
 		check(l, tester, l.currPos());
 	}
 
-	static <E> void checkApp(List<E> l, AbstractList<E> tester, E item) {
+	static <E> void checkApp(List<E> l, LinkedList<E> tester, E item) {
 		// Append the item to both lists
 		tester.add(item);
 		l.append(item);
 		check(l, tester, l.currPos());
 	}
 
-	static <E> void check(List<E> l, AbstractList<E> tester, int curr) {
+	static <E> void check(List<E> l, LinkedList<E> tester, int curr) {
 		// Check the length of list
 		if (l.length() != tester.size()) {
 			record.printError("An unexpected length of " + l.getClass() + ". \nLength of list: " + l.length()
@@ -197,24 +259,29 @@ public class ListTest {
 		// Check values in list
 		l.moveToStart();
 		for (int i = 0; i < tester.size(); i++) {
-			E expected = tester.remove(i);
-			E removed = l.remove();
-			if (removed != expected) {
-				record.printError("An unexpected value in " + l.getClass() + ". \nPopped from list: "
-						+ removed.toString() + "\nValue expected: " + expected.toString());
+			if (l.getValue() != tester.get(i)) {
+				record.printError("An unexpected value at the index of " + i + " in " + l.getClass()
+						+ ". \nValue in list: " + l.getValue() + "\nValue expected: " + tester.get(i));
 			}
-			// Restore values
-			tester.add(i, expected);
-			l.insert(expected);
 			l.next();
 		}
 		l.moveToPos(curr);
 	}
 
+	/**
+	 * Runs tests on generic AList, LList, and DList Class with Integer and String.
+	 * 
+	 * @param args
+	 *            not used
+	 * @throws IOException
+	 *             thrown if some errors happen while opening or creating a new text
+	 *             file
+	 */
 	public static void main(String args[]) throws IOException {
 		// Create a file to record errors if necessary
 		record = new ErrorRec(useFile, "ListTest");
 
+		// Test Integers
 		AList<Integer> al = new AList<Integer>();
 		LList<Integer> ll = new LList<Integer>();
 		DList<Integer> dl = new DList<Integer>();
@@ -222,6 +289,7 @@ public class ListTest {
 		testInt(ll);
 		testInt(dl);
 
+		// Test Strings
 		AList<String> al1 = new AList<String>();
 		LList<String> ll1 = new LList<String>();
 		DList<String> dl1 = new DList<String>();
@@ -234,7 +302,6 @@ public class ListTest {
 
 		if (TEST_SIZE != 0)
 			timing();
-
 	}
 
 	static void timing() {
@@ -254,6 +321,7 @@ public class ListTest {
 
 		time1 = System.currentTimeMillis();
 		for (int i = 0; i < TEST_SIZE; i++) {
+			@SuppressWarnings("unused") // This is ok
 			Link<Integer> temp = new Link<Integer>(null, null);
 			temp = new Link<Integer>(null, null);
 			temp = new Link<Integer>(null, null);
