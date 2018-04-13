@@ -7,7 +7,7 @@ class LStack<E> implements Stack<E> {
 
   // Constructors
   LStack() { top = null; size = 0; }
-  LStack(int size) { top = null; size = 0; }
+  LStack(int size) { top = null; this.size = 0; }
 /* *** ODSAendTag: LStack1 *** */
 
   public String toString() {

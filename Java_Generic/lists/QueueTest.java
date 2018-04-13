@@ -46,6 +46,12 @@ public class QueueTest {
 	}
 
 	static <E> void checkEmp(Queue<E> q) {
+		// Test length with empty stack
+		if (q.length() != 0) {
+			record.printError("An unexpected length of " + q.getClass() + ". \nLength of stack: " + q.length()
+					+ "\nLength expected: 0");
+		}
+		
 		// Test frontValue with empty queue
 		if (q.frontValue() != null) {
 			record.printError("An unexpected topValue in empty " + q.getClass() + ". \nTopValue in queue: "
@@ -117,8 +123,8 @@ public class QueueTest {
 	 * @param args
 	 *            not used
 	 * @throws IOException
-	 *             thrown if some errors happen while opening or creating a new
-	 *             text file
+	 *             thrown if some errors happen while opening or creating a new text
+	 *             file
 	 */
 	public static void main(String args[]) throws IOException {
 		// Create a file to record errors if necessary

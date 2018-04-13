@@ -99,6 +99,12 @@ public class ListTest {
 	}
 
 	static <E> void checkEmp(List<E> l) {
+		// Test length with empty stack
+		if (l.length() != 0) {
+			record.printError("An unexpected length of " + l.getClass() + ". \nLength of stack: " + l.length()
+					+ "\nLength expected: 0");
+		}
+
 		// Test currPos with empty list
 		if (l.currPos() != 0) {
 			record.printError("An unexpected topValue in empty " + l.getClass() + ". \nTopValue in list: " + l.currPos()

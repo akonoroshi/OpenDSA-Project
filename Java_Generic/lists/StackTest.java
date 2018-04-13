@@ -93,6 +93,12 @@ public class StackTest {
 	}
 
 	static <E> void checkEmp(lists.Stack<E> s) {
+		// Test length with empty stack
+		if (s.length() != 0) {
+			record.printError("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
+			+ "\nLength expected: 0");
+		}
+		
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
 			record.printError("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
