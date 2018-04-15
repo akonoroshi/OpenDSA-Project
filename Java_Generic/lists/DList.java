@@ -114,6 +114,11 @@ class DList<E> implements List<E> {
 		out.append(">");
 		return out.toString();
 	}
+  
+  //Tell if the list is empty or not
+  public boolean isEmpty() {
+	  return listSize == 0;
+  }
 
   // Test for XOR concept
   public void XOR() {

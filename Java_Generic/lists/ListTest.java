@@ -105,6 +105,12 @@ public class ListTest {
 					+ "\nLength expected: 0");
 		}
 
+		// isEmpty should return true
+		if (!l.isEmpty()) {
+			record.printError(
+					"The isEmpty method in " + l.getClass() + " does not return true when the list is empty.");
+		}
+
 		// Test currPos with empty list
 		if (l.currPos() != 0) {
 			record.printError("An unexpected topValue in empty " + l.getClass() + ". \nTopValue in list: " + l.currPos()
@@ -230,6 +236,12 @@ public class ListTest {
 		if (l.length() != tester.size()) {
 			record.printError("An unexpected length of " + l.getClass() + ". \nLength of list: " + l.length()
 					+ "\nLength expected: " + tester.size());
+		}
+
+		// isEmpty should return false
+		if (l.isEmpty()) {
+			record.printError(
+					"The isEmpty method in " + l.getClass() + " does not return false when the list is not empty.");
 		}
 
 		// Check the current position

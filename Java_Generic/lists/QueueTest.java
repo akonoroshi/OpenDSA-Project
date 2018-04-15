@@ -51,7 +51,13 @@ public class QueueTest {
 			record.printError("An unexpected length of " + q.getClass() + ". \nLength of stack: " + q.length()
 					+ "\nLength expected: 0");
 		}
-		
+
+		// isEmpty should return true
+		if (!q.isEmpty()) {
+			record.printError(
+					"The isEmpty method in " + q.getClass() + " does not return true when the queue is empty.");
+		}
+
 		// Test frontValue with empty queue
 		if (q.frontValue() != null) {
 			record.printError("An unexpected topValue in empty " + q.getClass() + ". \nTopValue in queue: "
@@ -82,6 +88,12 @@ public class QueueTest {
 		if (q.length() != tester.size()) {
 			record.printError("An unexpected length of " + q.getClass() + ". \nLength of queue: " + q.length()
 					+ "\nLength expected: " + tester.size());
+		}
+
+		// isEmpty should return false
+		if (q.isEmpty()) {
+			record.printError(
+					"The isEmpty method in " + q.getClass() + " does not return false when the queue is not empty.");
 		}
 
 		// Check frontValue

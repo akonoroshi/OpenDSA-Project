@@ -124,5 +124,10 @@ class LList<E> implements List<E> {
 	out.append(">");
 	return out.toString();
   }
+  
+  //Tell if the list is empty or not
+  public boolean isEmpty() {
+	  return listSize == 0;
+  }
 }
 /* *** ODSAendTag: LList *** */

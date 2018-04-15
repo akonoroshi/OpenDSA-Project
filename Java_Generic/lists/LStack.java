@@ -6,8 +6,8 @@ class LStack<E> implements Stack<E> {
   private int size;               // Number of elements
 
   // Constructors
-  LStack() { top = null; size = 0; }
-  LStack(int size) { top = null; this.size = 0; }
+  LStack() { clear(); }
+  LStack(int size) { this(); }
 /* *** ODSAendTag: LStack1 *** */
 
   public String toString() {
@@ -50,5 +50,8 @@ class LStack<E> implements Stack<E> {
 
   // Return stack length
   public int length() { return size; }
+  
+  // Tell if the stack is empty
+  public boolean isEmpty() { return size == 0; }
 }
 /* *** ODSAendTag: LStack2 *** */

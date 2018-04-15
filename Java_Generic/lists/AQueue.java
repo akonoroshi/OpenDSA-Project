@@ -69,5 +69,10 @@ class AQueue<E> implements Queue<E> {
 	public int length() {
 		return ((rear + maxSize) - front + 1) % maxSize;
 	}
+
+	// Tell if the queue is empty or not
+	public boolean isEmpty() {
+		return front - rear == 1;
+	}
 }
 /* *** ODSAendTag: AQueue2 *** */

@@ -54,6 +54,12 @@ public class StackTest {
 					+ "\nLength expected: " + tester.size());
 		}
 
+		// isEmpty should return false
+		if (s.isEmpty()) {
+			record.printError(
+					"The isEmpty method in " + s.getClass() + " does not return false when the stack is not empty.");
+		}
+
 		// Check topValue
 		if (s.topValue() != tester.peek()) {
 			record.printError("An unexpected topValue " + s.getClass() + ". \nTopValue in stack: "
@@ -96,9 +102,15 @@ public class StackTest {
 		// Test length with empty stack
 		if (s.length() != 0) {
 			record.printError("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()
-			+ "\nLength expected: 0");
+					+ "\nLength expected: 0");
 		}
-		
+
+		// isEmpty should return true
+		if (!s.isEmpty()) {
+			record.printError(
+					"The isEmpty method in " + s.getClass() + " does not return true when the stack is empty.");
+		}
+
 		// Test topValue with empty stack
 		if (s.topValue() != null) {
 			record.printError("An unexpected topValue in empty " + s.getClass() + ". \nTopValue in stack: "
@@ -126,8 +138,8 @@ public class StackTest {
 	 * @param args
 	 *            not used
 	 * @throws IOException
-	 *             thrown if some errors happen while opening or creating a new
-	 *             text useFile
+	 *             thrown if some errors happen while opening or creating a new text
+	 *             useFile
 	 */
 	public static void main(String args[]) throws IOException {
 		// Create a useFile to record errors if necessary

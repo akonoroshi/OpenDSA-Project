@@ -7,8 +7,8 @@ class LQueue<E> implements Queue<E> {
   private int size;      // Number of elements in queue
 
   // Constructors
-  LQueue() { init(); }
-  LQueue(int size) { init(); } // Ignore size
+  LQueue() { clear(); }
+  LQueue(int size) { this(); } // Ignore size
 
   // Initialize queue
   void init() {
@@ -18,7 +18,7 @@ class LQueue<E> implements Queue<E> {
 /* *** ODSAendTag: LQueue1 *** */
 
   // Reinitialize queue
-  public void clear() { init(); }
+  public void clear() { front = rear = new Link<E>(null); size = 0; }
 
   public String toString() {
     StringBuffer out = new StringBuffer(size * 4);
@@ -60,5 +60,8 @@ class LQueue<E> implements Queue<E> {
 
   // Return queue size
   public int length() { return size; }
+  
+  //Tell if the queue is empty or not
+  public boolean isEmpty() { return size == 0; }
 }
 /* *** ODSAendTag: LQueue2 *** */
