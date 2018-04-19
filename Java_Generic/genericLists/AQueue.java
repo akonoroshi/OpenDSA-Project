@@ -1,4 +1,4 @@
-package lists;
+package genericLists;
 
 // Array-based queue implementation
 /* *** ODSATag: AQueue1 *** */

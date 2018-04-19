@@ -1,4 +1,4 @@
-package lists;
+package genericLists;
 
 import java.io.*;
 import errorInfo.ErrorRec;
@@ -19,7 +19,7 @@ public class StackTest {
 	// out error messages
 	static ErrorRec record;
 
-	static void testInt(lists.Stack<Integer> s) {
+	static void testInt(genericLists.Stack<Integer> s) {
 		// Check empty stack
 		checkEmp(s);
 
@@ -31,7 +31,7 @@ public class StackTest {
 		}
 	}
 
-	static void testStr(lists.Stack<String> s) {
+	static void testStr(genericLists.Stack<String> s) {
 		// Check empty stack
 		checkEmp(s);
 
@@ -43,7 +43,7 @@ public class StackTest {
 		}
 	}
 
-	static <E> void check(lists.Stack<E> s, java.util.Stack<E> tester, E item) {
+	static <E> void check(genericLists.Stack<E> s, java.util.Stack<E> tester, E item) {
 		// Add the item to both stacks
 		s.push(item);
 		tester.push(item);
@@ -98,7 +98,7 @@ public class StackTest {
 		}
 	}
 
-	static <E> void checkEmp(lists.Stack<E> s) {
+	static <E> void checkEmp(genericLists.Stack<E> s) {
 		// Test length with empty stack
 		if (s.length() != 0) {
 			record.printError("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()

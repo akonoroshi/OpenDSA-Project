@@ -1,29 +1,31 @@
-package genericLists;
+package lists;
+
+import genericLists.Queue;
 
 /* *** ODSATag: LQueue1 *** */
 // Linked queue implementation
-class LQueue<E> implements Queue<E> {
-  private Link<E> front; // Pointer to front queue node
-  private Link<E> rear;  // Pointer to rear queuenode
-  private int size;      // Number of elements in queue
+class LQueue implements Queue {
+  private Link front; // Pointer to front queue node
+  private Link rear;  // Pointer to rear queuenode
+  private int size;   // Number of elements in queue
 
   // Constructors
-  LQueue() { clear(); }
-  LQueue(int size) { this(); } // Ignore size
+  LQueue() { init(); }
+  LQueue(int size) { init(); } // Ignore size
 
   // Initialize queue
   void init() {
-    front = rear = new Link<E>(null);
+    front = rear = new Link(null);
     size = 0;
   }
 /* *** ODSAendTag: LQueue1 *** */
 
   // Reinitialize queue
-  public void clear() { front = rear = new Link<E>(null); size = 0; }
+  public void clear() { init(); }
 
   public String toString() {
     StringBuffer out = new StringBuffer(size * 4);
-    for (Link<E> temp = front.next(); temp != null;  temp = temp.next()) {
+    for (Link temp = front.next(); temp != null;  temp = temp.next()) {
       out.append(temp.element());
       out.append(" ");
     }
@@ -33,8 +35,8 @@ class LQueue<E> implements Queue<E> {
 
 /* *** ODSATag: LQueueEnqueue *** */
   // Put element on rear
-  public boolean enqueue(E it) {
-    rear.setNext(new Link<E>(it, null));
+  public boolean enqueue(Object it) {
+    rear.setNext(new Link(it, null));
     rear = rear.next();
     size++;
     return true;
@@ -43,9 +45,9 @@ class LQueue<E> implements Queue<E> {
 
 /* *** ODSATag: LQueueDequeue *** */
   // Remove and return element from front
-  public E dequeue() {
+  public Object dequeue() {
     if (size == 0) return null;
-    E it = front.next().element(); // Store the value
+    Object it = front.next().element(); // Store the value
     front.setNext(front.next().next()); // Advance front
     if (front.next() == null) rear = front; // Last element
     size--;
@@ -54,15 +56,16 @@ class LQueue<E> implements Queue<E> {
 /* *** ODSAendTag: LQueueDequeue *** */
 
   // Return front element
-  public E frontValue() {
+  public Object frontValue() {
     if (size == 0) return null;
     return front.next().element();
   }
 
   // Return queue size
   public int length() { return size; }
-  
-  //Tell if the queue is empty or not
-  public boolean isEmpty() { return size == 0; }
+
+  public boolean isEmpty() {
+	return size == 0;
+}
 }
 /* *** ODSAendTag: LQueue2 *** */

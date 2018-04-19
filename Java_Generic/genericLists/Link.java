@@ -1,4 +1,5 @@
-package lists;
+package genericLists;
+
 /* *** ODSATag: Link *** */
 class Link<E> {         // Singly linked list node class
   private E e;          // Value for this node

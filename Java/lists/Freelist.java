@@ -1,35 +1,31 @@
-package genericLists;
+package lists;
 // Linked list implementation that uses a Freelist
-
-class Freelist<E> implements List<E> {
-  private Freelink<E> head;         // Pointer to list header
-  private Freelink<E> tail;         // Pointer to last element
-  private Freelink<E> curr;         // Access to current element
-  private int listSize;         // Size of list
+class FList implements List {
+  private FLink head;         // Pointer to list header
+  private FLink tail;         // Pointer to last element
+  private FLink curr;         // Access to current element
+  private int listSize;      // Size of list
 
   // Constructors
-  Freelist(int size) { this(); }   // Constructor -- Ignore size
-  Freelist() { clear(); }
+  FList(int size) { this(); }   // Constructor -- Ignore size
+  FList() { clear(); }
 
   // Remove all elements
   public void clear() {
     while (head != null) {
-      Freelink<E> temp = head.next();
+      FLink temp = head.next();
       head.release();
       head = temp;
     }
-    curr = tail = Freelink.get(null, null); // Create trailer
-    head = Freelink.get(null, tail);        // Create header
+    curr = tail = FLink.get(null, null); // Create trailer
+    head = FLink.get(null, tail);        // Create header
     listSize = 0;
   }
   
-  // WARNING: In append(), I am using a temp variable because putting that value
-  // into the call to setNext generated a compiler error for no reason that I can see.
-
 /* *** ODSATag: Freelist *** */
   // Insert "it" at current position
-  public boolean insert(E it) {
-    curr.setNext(Freelink.get(curr.element(), curr.next())); // Get link
+  public boolean insert(Object it) {
+    curr.setNext(FLink.get(curr.element(), curr.next())); // Get link
     curr.setElement(it);
     if (tail == curr) tail = curr.next();    // New tail
     listSize++;
@@ -37,9 +33,8 @@ class Freelist<E> implements List<E> {
   }
 
   // Append "it" to list
-  public boolean append(E it) {
-    Freelink<E> temp = Freelink.get(null, null);
-    tail.setNext(temp);
+  public boolean append(Object it) {
+    tail.setNext(FLink.get(null, null));
     tail.setElement(it);
     tail = tail.next();
     listSize++;
@@ -47,12 +42,12 @@ class Freelist<E> implements List<E> {
   }
 
   // Remove and return current element
-  public E remove () {
+  public Object remove () {
     if (curr == tail) return null;          // Nothing to remove
-    E it = curr.element();                  // Remember value
+    Object it = curr.element();             // Remember value
     curr.setElement(curr.next().element()); // Pull forward the next element
     if (curr.next() == tail) tail = curr;   // Removed last, move tail
-    Freelink<E> tempptr = curr.next();             // Remember the link
+    FLink tempptr = curr.next();             // Remember the link
     curr.setNext(curr.next().next());       // Point around unneeded link
     tempptr.release();                      // Release the link
     listSize--;                             // Decrement element count
@@ -66,7 +61,7 @@ class Freelist<E> implements List<E> {
   // Move curr one step left; no change if now at front
   public void prev() {
     if (head.next() == curr) return;         // No previous element
-    Freelink<E> temp = head;
+    FLink temp = head;
     // March down list until we find the previous element
     while (temp.next() != curr) temp = temp.next();
     curr = temp;
@@ -80,7 +75,7 @@ class Freelist<E> implements List<E> {
 
   // Return the position of the current element
   public int currPos() {
-    Freelink<E> temp = head.next();
+    FLink temp = head.next();
     int i;
     for (i=0; curr != temp; i++)
       temp = temp.next();
@@ -99,12 +94,12 @@ class Freelist<E> implements List<E> {
   public boolean isAtEnd() { return curr == tail; }
 
   // Return current element value
-  public E getValue() {
+  public Object getValue() {
     if(curr == tail) return null;
     return curr.element();
   }
-  
+
   public boolean isEmpty() {
-	return listSize == 0;  
-  }
+	return listSize == 0;
+}
 }

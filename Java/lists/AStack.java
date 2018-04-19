@@ -1,19 +1,20 @@
-package genericLists;
+package lists;
+
+import genericLists.Stack;
 
 // Array-based stack implementation
 /* *** ODSATag: AStack1 *** */
-class AStack<E> implements Stack<E> {
-  private E stackArray[];         // Array holding stack
+class AStack implements Stack {
+  private Object stackArray[];    // Array holding stack
   private static final int DEFAULT_SIZE = 10;
   private int maxSize;            // Maximum size of stack
   private int top;                // First free position at top
 
   // Constructors
-  @SuppressWarnings("unchecked") // Generic array allocation
   AStack(int size) {
     maxSize = size;
     top = 0;
-    stackArray = (E[])new Object[size]; // Create stackArray
+    stackArray = new Object[size]; // Create stackArray
   }
   AStack() { this(DEFAULT_SIZE); }
 /* *** ODSAendTag: AStack1 *** */
@@ -32,7 +33,7 @@ class AStack<E> implements Stack<E> {
 
 // Push "it" onto stack
 /* *** ODSATag: AStackPush *** */
-  public boolean push(E it) {
+  public boolean push(Object it) {
     if (top >= maxSize) return false;
     stackArray[top++] = it;
     return true;
@@ -41,19 +42,21 @@ class AStack<E> implements Stack<E> {
 
 // Remove and return top element
 /* *** ODSATag: AStackPop *** */
-  public E pop() {
+  public Object pop() {
     if (top == 0) return null;
     return stackArray[--top];
   }
 /* *** ODSAendTag: AStackPop *** */
 
-  public E topValue() {          // Return top element
+  public Object topValue() {          // Return top element
     if (top == 0) return null;
     return stackArray[top-1];
   }
 
   public int length() { return top; } // Return stack size
 
-  public boolean isEmpty() { return top == 0; }	// Tell if the stack is empty
+  public boolean isEmpty() {
+	return top == 0;
+}
 }
 /* *** ODSAendTag: AStack2 *** */

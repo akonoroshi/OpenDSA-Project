@@ -1,33 +1,34 @@
-package genericLists;
+package lists;
 
 /* *** ODSATag: AList *** */
 // Array-based list implementation
 /* *** ODSATag: AListVars *** */
-class AList<E> implements List<E> {
-  private E listArray[];                  // Array holding list elements
+class AList implements List {
+  private Object listArray[];             // Array holding list elements
   private static final int DEFAULT_SIZE = 10; // Default size
   private int maxSize;                    // Maximum size of list
   private int listSize;                   // Current # of list items
   private int curr;                       // Position of current element
 /* *** ODSAendTag: AListVars *** */
 
+/* *** ODSATag: Constructors *** */
   // Constructors
   // Create a new list object with maximum size "size"
-  @SuppressWarnings("unchecked") // Generic array allocation
   AList(int size) {
     maxSize = size;
     listSize = curr = 0;
-    listArray = (E[])new Object[size];         // Create listArray
+    listArray = new Object[size];         // Create listArray
   }
   // Create a list with the default capacity
   AList() { this(DEFAULT_SIZE); }          // Just call the other constructor
+/* *** ODSAendTag: Constructors *** */
 
   public void clear()                     // Reinitialize the list
     { listSize = curr = 0; }              // Simply reinitialize values
 
 /* *** ODSATag: AListInsert *** */
   // Insert "it" at current position
-  public boolean insert(E it) {
+  public boolean insert(Object it) {
     if (listSize >= maxSize) return false;
     for (int i=listSize; i>curr; i--)  // Shift elements up
       listArray[i] = listArray[i-1];   //   to make room
@@ -39,7 +40,7 @@ class AList<E> implements List<E> {
 
 /* *** ODSATag: AListAppend *** */
   // Append "it" to list
-  public boolean append(E it) {
+  public boolean append(Object it) {
     if (listSize >= maxSize) return false;
     listArray[listSize++] = it;
     return true;
@@ -48,10 +49,10 @@ class AList<E> implements List<E> {
 
 /* *** ODSATag: AListRemove *** */
   // Remove and return the current element
-  public E remove() {
+  public Object remove() {
     if ((curr<0) || (curr>=listSize))  // No current element
       return null;
-    E it = listArray[curr];            // Copy the element
+    Object it = listArray[curr];       // Copy the element
     for(int i=curr; i<listSize-1; i++) // Shift them down
       listArray[i] = listArray[i+1];
     listSize--;                        // Decrement size
@@ -77,32 +78,13 @@ class AList<E> implements List<E> {
   public boolean isAtEnd() { return curr == listSize; }
 
   // Return the current element
-  public E getValue() {
+  public Object getValue() {
     if ((curr < 0) || (curr >= listSize)) // No current element
       return null;
     return listArray[curr];
   }
-  
-  public String toString() {
-	StringBuffer out = new StringBuffer((listSize + 1) * 4);
-
-	out.append("< ");
-	for (int i = 0; i < curr; i++) {
-		out.append(listArray[i]);
-		out.append(" ");
-	}
-	out.append("| ");
-	for (int i = curr; i < listSize; i++) {
-		out.append(listArray[i]);
-		out.append(" ");
-	}
-	out.append(">");
-	return out.toString();
-  }
-  
-  //Tell if the list is empty or not
-  public boolean isEmpty() {
-	  return listSize == 0;
-  }
+public boolean isEmpty() {
+	return listSize == 0;
+}
 }
 /* *** ODSAendTag: AList *** */

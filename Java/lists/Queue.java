@@ -1,22 +1,19 @@
-package genericLists;
+package lists;
 /* *** ODSATag: Queue *** */
-public interface Queue<E> { // Queue class ADT
+public interface Queue { // Queue class ADT
   // Reinitialize queue
   public void clear();
 
   // Put element on rear
-  public boolean enqueue(E it);
+  public boolean enqueue(Object it);
 
   // Remove and return element from front
-  public E dequeue();
+  public Object dequeue();
 
   // Return front element
-  public E frontValue();
+  public Object frontValue();
 
   // Return queue size
   public int length();
-  
-  //Tell if the queue is empty or not
-  public boolean isEmpty();
 }
 /* *** ODSAendTag: Queue *** */

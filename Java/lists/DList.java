@@ -1,29 +1,31 @@
-package genericLists;
+package lists;
+
+import genericLists.List;
 
 // Doubly Linked list implementation
-class DList<E> implements List<E> {
-  private DLink<E> head;                    // Pointer to list header
-  private DLink<E> tail;                    // Pointer to last element
-  private DLink<E> curr;                    // Access to current element
-  private int listSize;                    // Size of list
+class DList implements List {
+  private DLink head;         // Pointer to list header
+  private DLink tail;         // Pointer to last element
+  private DLink curr;         // Access to current element
+  private int listSize;      // Size of list
 
   // Constructors
-  DList(int size) { this(); }              // Constructor -- Ignore size
+  DList(int size) { this(); }     // Constructor -- Ignore size
   DList() { clear(); }
 
   // Remove all elements
   public void clear() {
-    curr = tail = new DLink<E>(null, null); // Create trailer
-    head = new DLink<E>(null, tail);        // Create header
-    tail.setPrev(head);                    // Set prev link for trailer
+    curr = tail = new DLink(null, null); // Create trailer
+    head = new DLink(null, tail);        // Create header
+    tail.setPrev(head);                 // Set prev link for trailer
     listSize = 0;
   }
 
 /* *** ODSATag: Dlist *** */
   // Insert "it" at current position
 /* *** ODSATag: DListInsert *** */
-  public boolean insert(E it) {
-    curr = new DLink<E>(it, curr.prev(), curr);
+  public boolean insert(Object it) {
+    curr = new DLink(it, curr.prev(), curr);
     curr.prev().setNext(curr);
     curr.next().setPrev(curr);
     listSize++;
@@ -33,8 +35,8 @@ class DList<E> implements List<E> {
 
 // Append "it" to list
 /* *** ODSATag: DListAppend *** */
-  public boolean append(E it) {
-    tail.setPrev(new DLink<E>(it, tail.prev(), tail));
+  public boolean append(Object it) {
+    tail.setPrev(new DLink(it, tail.prev(), tail));
     tail.prev().prev().setNext(tail.prev());
     if (curr == tail) curr = tail.prev();
     listSize++;
@@ -44,9 +46,9 @@ class DList<E> implements List<E> {
 
   // Remove and return current element
 /* *** ODSATag: DListRemove *** */
-  public E remove() {
+  public Object remove() {
     if (curr == tail) return null;        // Nothing to remove
-    E it = curr.element();                // Remember value
+    Object it = curr.element();           // Remember value
     curr.prev().setNext(curr.next());     // Remove from list
     curr.next().setPrev(curr.prev());
     curr = curr.next();
@@ -72,7 +74,7 @@ class DList<E> implements List<E> {
   public int length() { return listSize; } // Return list length
   // Return the position of the current element
   public int currPos() {
-    DLink<E> temp = head.next();
+    DLink temp = head.next();
     int i;
     for (i=0; curr != temp; i++)
       temp = temp.next();
@@ -91,34 +93,13 @@ class DList<E> implements List<E> {
   public boolean isAtEnd() { return curr == tail; }
 
   // Return current element value
-  public E getValue() {
+  public Object getValue() {
     if(curr == tail) return null;
     return curr.element();
   }
   
-  public String toString() {
-		DLink<E> temp = head.next();
-		StringBuffer out = new StringBuffer((listSize + 1) * 4);
-
-		out.append("< ");
-		for (int i = 0; i < currPos(); i++) {
-			out.append(temp.element());
-			out.append(" ");
-			temp = temp.next();
-		}
-		out.append("| ");
-		for (int i = currPos(); i < listSize; i++) {
-			out.append(temp.element());
-			out.append(" ");
-			temp = temp.next();
-		}
-		out.append(">");
-		return out.toString();
-	}
-  
-  //Tell if the list is empty or not
   public boolean isEmpty() {
-	  return listSize == 0;
+	return listSize == 0;
   }
 
   // Test for XOR concept
@@ -130,4 +111,5 @@ b = a - b; // Now b contains original value of a
 a = a - b; // Now a contains original value of b
 /* *** ODSAendTag: XOR *** */
   }
+
 }

@@ -1,21 +1,25 @@
-package genericLists;
+package lists;
 /* *** ODSATag: ListADT *** */
-// List class ADT. Generalize the element type using Java Generics.
-public interface List<E> { // List class ADT
+/* *** ODSATag: ListADT1 *** */
+// List class ADT. Generalize by using "Object" for the element type.
+// An alternative would be to use Java Generics.
+public interface List { // List class ADT
   // Remove all contents from the list, so it is once again empty
   public void clear();
 
   // Insert "it" at the current location
   // The client must ensure that the list's capacity is not exceeded
-  public boolean insert(E it);
+  public boolean insert(Object it);
 
   // Append "it" at the end of the list
   // The client must ensure that the list's capacity is not exceeded
-  public boolean append(E it);
+  public boolean append(Object it);
 
   // Remove and return the current element
-  public E remove();
+  public Object remove();
+/* *** ODSAendTag: ListADT1 *** */
 
+/* *** ODSATag: ListADT2 *** */
   // Set the current position to the start of the list
   public void moveToStart();
 
@@ -30,7 +34,9 @@ public interface List<E> { // List class ADT
 
   // Return the number of elements in the list
   public int length();
+/* *** ODSAendTag: ListADT2 *** */
 
+/* *** ODSATag: ListADT3 *** */
   // Return the position of the current element
   public int currPos();
 
@@ -41,9 +47,9 @@ public interface List<E> { // List class ADT
   public boolean isAtEnd();
 
   // Return the current element
-  public E getValue();
+  public Object getValue();
   
-  // Tell if the list is empty or not
   public boolean isEmpty();
 }
+/* *** ODSAendTag: ListADT3 *** */
 /* *** ODSAendTag: ListADT *** */

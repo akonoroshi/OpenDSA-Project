@@ -1,4 +1,4 @@
-package lists;
+package genericLists;
 
 import java.io.*;
 import java.util.LinkedList;
