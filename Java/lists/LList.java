@@ -1,4 +1,5 @@
 package lists;
+
 /* *** ODSATag: LList *** */
 // Linked list implementation
 /* *** ODSATag: LListVars *** */
@@ -104,5 +105,25 @@ class LList implements List {
 
   // Check if the list is empty
   public boolean isEmpty() { return listSize == 0; }
+  
+  public String toString() {
+		Link temp = head.next();
+		StringBuffer out = new StringBuffer((listSize + 1) * 4);
+
+		out.append("< ");
+		for (int i = 0; i < currPos(); i++) {
+			out.append(temp.element());
+			out.append(" ");
+			temp = temp.next();
+		}
+		out.append("| ");
+		for (int i = currPos(); i < listSize; i++) {
+			out.append(temp.element());
+			out.append(" ");
+			temp = temp.next();
+		}
+		out.append(">");
+		return out.toString();
+	  }
 }
 /* *** ODSAendTag: LList *** */
