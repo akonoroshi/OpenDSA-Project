@@ -1,7 +1,5 @@
 package lists;
 
-import genericLists.Queue;
-
 // Array-based queue implementation
 /* *** ODSATag: AQueue1 *** */
 class AQueue implements Queue {
@@ -59,8 +57,7 @@ class AQueue implements Queue {
   // Return queue size
   public int length() { return ((rear+maxSize) - front + 1) % maxSize; }
 
-public boolean isEmpty() {
-	return front - rear == 1;
-}
+  // Check if the queue is empty
+  public boolean isEmpty() { return front - rear == 1; }
 }
 /* *** ODSAendTag: AQueue2 *** */

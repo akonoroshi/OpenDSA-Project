@@ -15,5 +15,8 @@ public interface Queue { // Queue class ADT
 
   // Return queue size
   public int length();
+
+  // Return true if the queue is empty
+  public boolean isEmpty();
 }
 /* *** ODSAendTag: Queue *** */

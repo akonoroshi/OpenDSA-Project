@@ -1,7 +1,5 @@
 package lists;
 
-import genericLists.Stack;
-
 /* *** ODSATag: LStack1 *** */
 // Linked stack implementation
 class LStack implements Stack {
@@ -54,8 +52,7 @@ class LStack implements Stack {
   // Return stack length
   public int length() { return size; }
   
-  public boolean isEmpty() {
-	return size == 0;
-}
+  // Check if the stack is empty
+  public boolean isEmpty() { return size == 0; }
 }
 /* *** ODSAendTag: LStack2 *** */
