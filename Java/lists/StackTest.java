@@ -24,7 +24,7 @@ public class StackTest {
 
 		// Compare Stack with java.util.Stack to test length, topValue,
 		// toString, push, and pop
-		java.util.Stack tester = new java.util.Stack();
+		java.util.Stack<Object> tester = new java.util.Stack<Object>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			check(s, tester, 100 + i);
 		}
@@ -36,13 +36,13 @@ public class StackTest {
 
 		// Compare Stack with java.util.Stack to test length, topValue,
 		// toString, push, and pop
-		java.util.Stack tester = new java.util.Stack();
+		java.util.Stack<Object> tester = new java.util.Stack<Object>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			check(s, tester, "Str" + i);
 		}
 	}
 
-	static void check(lists.Stack s, java.util.Stack tester, Object item) {
+	static void check(lists.Stack s, java.util.Stack<Object> tester, Object item) {
 		// Add the item to both stacks
 		s.push(item);
 		tester.push(item);
@@ -77,7 +77,7 @@ public class StackTest {
 		}
 
 		// Check values in stack
-		java.util.Stack temp = new java.util.Stack();
+		java.util.Stack<Object> temp = new java.util.Stack<Object>();
 		int initSize = tester.size();
 		for (int i = 0; i < initSize; i++) {
 			Object popped = s.pop();
