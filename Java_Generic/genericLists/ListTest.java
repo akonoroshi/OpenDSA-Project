@@ -13,7 +13,7 @@ import errorInfo.ErrorRec;
  */
 public class ListTest {
 	// The number of items stored in stack during the test
-	static final int TEST_SIZE = 9;
+	static final int TEST_SIZE = 8;
 	// True if you want to create a text file to record errors
 	static final boolean useFile = true;
 	// Instance of ErrorRec class which holds the number of errors and prints
@@ -303,17 +303,21 @@ public class ListTest {
 		AList<Integer> al = new AList<Integer>();
 		LList<Integer> ll = new LList<Integer>();
 		DList<Integer> dl = new DList<Integer>();
+		Freelist<Integer> fl = new Freelist<Integer>();
 		testInt(al);
 		testInt(ll);
 		testInt(dl);
+		testInt(fl);
 
 		// Test Strings
 		AList<String> al1 = new AList<String>();
 		LList<String> ll1 = new LList<String>();
 		DList<String> dl1 = new DList<String>();
+		Freelist<String> fl1 = new Freelist<String>();
 		testStr(al1);
 		testStr(ll1);
 		testStr(dl1);
+		testStr(fl1);
 
 		// Get a feedback about the result (success or fail)
 		record.feedback();
