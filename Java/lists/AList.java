@@ -83,8 +83,8 @@ class AList implements List {
       return null;
     return listArray[curr];
   }
-public boolean isEmpty() {
-	return listSize == 0;
-}
+  
+  // Check if the list is empty
+  public boolean isEmpty() { return listSize == 0; }
 }
 /* *** ODSAendTag: AList *** */

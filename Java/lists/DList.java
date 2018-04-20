@@ -1,7 +1,5 @@
 package lists;
 
-import genericLists.List;
-
 // Doubly Linked list implementation
 class DList implements List {
   private DLink head;         // Pointer to list header
@@ -98,9 +96,8 @@ class DList implements List {
     return curr.element();
   }
   
-  public boolean isEmpty() {
-	return listSize == 0;
-  }
+  // Check if the list is empty
+  public boolean isEmpty() { return listSize == 0; }
 
   // Test for XOR concept
   public void XOR() {

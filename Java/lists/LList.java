@@ -100,12 +100,9 @@ class LList implements List {
   public boolean isAtEnd() { return curr == tail; }
 
   // Return current element value. Note that null gets returned if curr is at the tail
-  public Object getValue() {
-    return curr.element();
-  }
+  public Object getValue() { return curr.element(); }
 
-  public boolean isEmpty() {
-	return listSize == 0;
-}
+  // Check if the list is empty
+  public boolean isEmpty() { return listSize == 0; }
 }
 /* *** ODSAendTag: LList *** */
