@@ -13,7 +13,7 @@ import errorInfo.ErrorRec;
  */
 public class ListTest {
 	// The number of items stored in stack during the test
-	static final int TEST_SIZE = 8;
+	static final int TEST_SIZE = 10;
 	// True if you want to create a text file to record errors
 	static final boolean useFile = true;
 	// Instance of ErrorRec class which holds the number of errors and prints
@@ -220,6 +220,7 @@ public class ListTest {
 	static <E> void checkIns(List<E> l, LinkedList<E> tester, E item) {
 		// Insert the item to both lists
 		tester.add(l.currPos(), item);
+		// TODO check returned value
 		l.insert(item);
 		check(l, tester, l.currPos());
 	}
@@ -227,6 +228,7 @@ public class ListTest {
 	static <E> void checkApp(List<E> l, LinkedList<E> tester, E item) {
 		// Append the item to both lists
 		tester.add(item);
+		// TODO check returned value
 		l.append(item);
 		check(l, tester, l.currPos());
 	}
@@ -308,6 +310,7 @@ public class ListTest {
 		testInt(ll);
 		testInt(dl);
 		testInt(fl);
+		// TODO create a small AList
 
 		// Test Strings
 		AList<String> al1 = new AList<String>();
@@ -318,6 +321,7 @@ public class ListTest {
 		testStr(ll1);
 		testStr(dl1);
 		testStr(fl1);
+		// TODO create a small AList
 
 		// Get a feedback about the result (success or fail)
 		record.feedback();

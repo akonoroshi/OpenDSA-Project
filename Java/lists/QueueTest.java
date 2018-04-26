@@ -26,7 +26,7 @@ public class QueueTest {
 
 		// Compare Queue with java.util.Queue to test length, frontValue,
 		// toString, enqueue, and dequeue
-		Deque tester = new LinkedList();
+		Deque<Object> tester = new LinkedList<Object>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			check(q, tester, 100 + i);
 		}
@@ -38,7 +38,7 @@ public class QueueTest {
 
 		// Compare Queue with java.util.Queue to test length, frontValue,
 		// toString, enqueue, and dequeue
-		Deque tester = new LinkedList();
+		Deque<Object> tester = new LinkedList<Object>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			check(q, tester, "Str" + i);
 		}
@@ -78,7 +78,7 @@ public class QueueTest {
 		}
 	}
 
-	static void check(Queue q, Deque tester, Object item) {
+	static void check(Queue q, Deque<Object> tester, Object item) {
 		// Add the item to both queues
 		q.enqueue(item);
 		tester.addLast(item);

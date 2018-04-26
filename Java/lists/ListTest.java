@@ -40,7 +40,7 @@ public class ListTest {
 
 		// Compare list with java.util.list to test length, getValue,
 		// toString, currPos, and remove. Add items by inserting
-		LinkedList<Integer> tester = new LinkedList<Integer>();
+		LinkedList<Object> tester = new LinkedList<Object>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkIns(l, tester, 100 + i);
 		}
