@@ -11,15 +11,17 @@ clean:
 
 StackTest: build/StackTest/success
 
-build/StackTest/success: Lists/Stack.java Lists/AStack.java Lists/Link.java Lists/LStack.java Lists/StackTest.java
+build/StackTest/success: Lists/Stack.java Lists/AStack.java Lists/Link.java Lists/LStack.java Lists/StackTest.java ../Java_Generic/errorInfo/ErrorRec.java
 	@echo "Array-based and Linked Stack Test"
 	-@rm -rf build/StackTest
 	@mkdir build/StackTest
-	@cp Lists/Stack.java build/StackTest
-	@cp Lists/AStack.java build/StackTest
-	@cp Lists/LStack.java build/StackTest
-	@cp Lists/Link.java build/StackTest
-	@cp Lists/StackTest.java build/StackTest
+	@mkdir build/StackTest/lists build/StackTest/errorInfo
+	@cp Lists/Stack.java build/StackTest/lists
+	@cp Lists/AStack.java build/StackTest/lists
+	@cp Lists/LStack.java build/StackTest/lists
+	@cp Lists/Link.java build/StackTest/lists
+	@cp ../Java_Generic/errorInfo/ErrorRec.java build/StackTest/errorInfo
+	@cp Lists/StackTest.java build/StackTest/lists
 	cd build/StackTest; \
-	javac $(CFLAGS) StackTest.java; \
-	$(JAVA) $(RFLAGS) StackTest
+	javac $(CFLAGS) lists/StackTest.java; \
+	$(JAVA) $(RFLAGS) lists/StackTest
