@@ -302,17 +302,21 @@ public class ListTest {
 		AList al = new AList();
 		LList ll = new LList();
 		DList dl = new DList();
+		FList fl = new FList();
 		testInt(al);
 		testInt(ll);
 		testInt(dl);
+		testInt(fl);
 
 		// Test Strings
 		AList al1 = new AList();
 		LList ll1 = new LList();
 		DList dl1 = new DList();
+		FList fl1 = new FList();
 		testStr(al1);
 		testStr(ll1);
 		testStr(dl1);
+		testStr(fl1);
 
 		// Get a feedback about the result (success or fail)
 		record.feedback();
