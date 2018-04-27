@@ -48,18 +48,24 @@ Lists: ListTest DoubleTest FreeList StackTest QueueTest
 
 ListTest: build/ListTest/success
 
-build/ListTest/success: Lists/ListTest.java Lists/List.java Lists/AList.java Lists/LList.java Lists/Link.java
-	@echo "Array-based and Linked List Test"
+build/ListTest/success: Lists/ListTest.java Lists/List.java Lists/AList.java Lists/LList.java Lists/Link.java Lists/DList.java Lists/DLink.java Lists/FLink.java Lists/FList.java ../Java_Generic/errorInfo/ErrorRec.java build/StackTest/errorInfo
+	@echo "Array-based, Singly and Doubly Linked, and Free List Test"
 	-@rm -rf build/ListTest
 	@mkdir build/ListTest
-	cp Lists/ListTest.java build/ListTest
-	cp Lists/List.java build/ListTest
-	cp Lists/AList.java build/ListTest
-	cp Lists/LList.java build/ListTest
-	cp Lists/Link.java build/ListTest
+	@mkdir build/ListTest/lists build/ListTest/errorInfo
+	@cp Lists/ListTest.java build/ListTest/lists
+	@cp Lists/List.java build/ListTest/lists
+	@cp Lists/AList.java build/ListTest/lists
+	@cp Lists/LList.java build/ListTest/lists
+	@cp Lists/Link.java build/ListTest/lists
+	@cp Lists/DList.java build/ListTest/lists
+	@cp Lists/DLink.java build/ListTest/lists
+	@cp Lists/FList.java build/ListList/lists
+	@cp Lists/FLink.java build/ListList/lists
+	@cp ../Java_Generic/errorInfo/ErrorRec.java build/ListTest/errorInfo
 	cd build/ListTest; \
-	javac $(CFLAGS) ListTest.java; \
-	$(JAVA) $(RFLAGS) ListTest
+	javac $(CFLAGS) lists/ListTest.java; \
+	$(JAVA) $(RFLAGS) lists/ListTest
 
 DoubleTest: build/DoubleTest/success
 
