@@ -1,3 +1,5 @@
+package Binary;
+
 /* *** ODSATag: BinNode *** */
 interface BinNode<E> { // Binary tree node ADT
   // Get and set the element value

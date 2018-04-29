@@ -1,3 +1,6 @@
+package Binary;
+
+public class CheckBST {
 // Assumes that equal values go to the left
 /* *** ODSATag: checkBST *** */
 static <E extends Comparable<E>> boolean checkBST(BSTNode<E> rt, E low, E high) {
@@ -11,5 +14,6 @@ static <E extends Comparable<E>> boolean checkBST(BSTNode<E> rt, E low, E high) 
     return false; // Left side failed
   // TODO is stack or list empty?
   return checkBST(rt.right(), rootval, high);
+}
 }
 /* *** ODSAendTag: checkBST *** */
