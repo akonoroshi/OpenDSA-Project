@@ -305,7 +305,7 @@ public class ListTest {
 		AList<Integer> al = new AList<Integer>();
 		LList<Integer> ll = new LList<Integer>();
 		DList<Integer> dl = new DList<Integer>();
-		Freelist<Integer> fl = new Freelist<Integer>();
+		FList<Integer> fl = new FList<Integer>();
 		testInt(al);
 		testInt(ll);
 		testInt(dl);
@@ -316,7 +316,7 @@ public class ListTest {
 		AList<String> al1 = new AList<String>();
 		LList<String> ll1 = new LList<String>();
 		DList<String> dl1 = new DList<String>();
-		Freelist<String> fl1 = new Freelist<String>();
+		FList<String> fl1 = new FList<String>();
 		testStr(al1);
 		testStr(ll1);
 		testStr(dl1);

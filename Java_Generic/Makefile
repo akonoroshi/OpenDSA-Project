@@ -11,11 +11,11 @@ clean:
 
 Demo: UpDown
 
-UpDown: Demo/UpDown.1 Demo/UpDown.2 Utils/Processing.java
+UpDown: Demo/UpDown.java
 	@echo "UpDown Test"
 	-@rm -rf build/UpDown
 	@mkdir build/UpDown
-	cat Demo/UpDown.1 Utils/Processing.java Demo/UpDown.2 > build/UpDown/UpDown.java
+	cp Demo/UpDown.java build/UpDown
 	cd build/UpDown; \
 	javac $(CFLAGS) UpDown.java; \
 	$(JAVA) $(RFLAGS) UpDown
@@ -48,24 +48,24 @@ Lists: ListTest DoubleTest FreeList StackTest QueueTest
 
 ListTest: build/ListTest/success
 
-build/ListTest/success: Lists/ListTest.java Lists/List.java Lists/AList.java Lists/LList.java Lists/Link.java Lists/DList.java Lists/DLink.java Lists/FLink.java Lists/FList.java ../Java_Generic/errorInfo/ErrorRec.java
+build/ListTest/success: genericLists/ListTest.java genericLists/List.java genericLists/AList.java genericLists/LList.java genericLists/Link.java genericLists/DList.java genericLists/DLink.java genericLists/FLink.java genericLists/FList.java errorInfo/ErrorRec.java
 	@echo "Array-based, Singly and Doubly Linked, and Free List Test"
 	-@rm -rf build/ListTest
 	@mkdir build/ListTest
-	@mkdir build/ListTest/lists build/ListTest/errorInfo
-	@cp Lists/List.java build/ListTest/lists
-	@cp Lists/AList.java build/ListTest/lists
-	@cp Lists/LList.java build/ListTest/lists
-	@cp Lists/Link.java build/ListTest/lists
-	@cp Lists/DList.java build/ListTest/lists
-	@cp Lists/DLink.java build/ListTest/lists
-	@cp Lists/FList.java build/ListTest/lists
-	@cp Lists/FLink.java build/ListTest/lists
-	@cp ../Java_Generic/errorInfo/ErrorRec.java build/ListTest/errorInfo
-	@cp Lists/ListTest.java build/ListTest/lists
+	@mkdir build/ListTest/genericLists build/ListTest/errorInfo
+	@cp genericLists/List.java build/ListTest/genericLists
+	@cp genericLists/AList.java build/ListTest/genericLists
+	@cp genericLists/LList.java build/ListTest/genericLists
+	@cp genericLists/Link.java build/ListTest/genericLists
+	@cp genericLists/DList.java build/ListTest/genericLists
+	@cp genericLists/DLink.java build/ListTest/genericLists
+	@cp genericLists/FList.java build/ListTest/genericLists
+	@cp genericLists/FLink.java build/ListTest/genericLists
+	@cp errorInfo/ErrorRec.java build/ListTest/errorInfo
+	@cp genericLists/ListTest.java build/ListTest/genericLists
 	cd build/ListTest; \
-	javac $(CFLAGS) lists/ListTest.java; \
-	$(JAVA) $(RFLAGS) lists/ListTest
+	javac $(CFLAGS) genericLists/ListTest.java; \
+	$(JAVA) $(RFLAGS) genericLists/ListTest
 
 DoubleTest: build/DoubleTest/success
 
@@ -99,37 +99,38 @@ build/FreeList/success: Lists/List.java Lists/AList.java Lists/Freelink.java Lis
 
 StackTest: build/StackTest/success
 
-build/StackTest/success: Lists/Stack.java Lists/AStack.java Lists/Link.java Lists/LStack.java Lists/StackTest.java ../Java_Generic/errorInfo/ErrorRec.java
+build/StackTest/success: genericLists/Stack.java genericLists/AStack.java genericLists/Link.java genericLists/LStack.java genericLists/StackTest.java errorInfo/ErrorRec.java
 	@echo "Array-based and Linked Stack Test"
 	-@rm -rf build/StackTest
 	@mkdir build/StackTest
-	@mkdir build/StackTest/lists build/StackTest/errorInfo
-	@cp Lists/Stack.java build/StackTest/lists
-	@cp Lists/AStack.java build/StackTest/lists
-	@cp Lists/LStack.java build/StackTest/lists
-	@cp Lists/Link.java build/StackTest/lists
-	@cp ../Java_Generic/errorInfo/ErrorRec.java build/StackTest/errorInfo
-	@cp Lists/StackTest.java build/StackTest/lists
+	@mkdir build/StackTest/genericLists build/StackTest/errorInfo
+	@cp genericLists/Stack.java build/StackTest/genericLists
+	@cp genericLists/AStack.java build/StackTest/genericLists
+	@cp genericLists/LStack.java build/StackTest/genericLists
+	@cp genericLists/Link.java build/StackTest/genericLists
+	@cp errorInfo/ErrorRec.java build/StackTest/errorInfo
+	@cp genericLists/StackTest.java build/StackTest/genericLists
 	cd build/StackTest; \
-	javac $(CFLAGS) lists/StackTest.java; \
-	$(JAVA) $(RFLAGS) lists/StackTest
+	javac $(CFLAGS) genericLists/StackTest.java; \
+	$(JAVA) $(RFLAGS) genericLists/StackTest
 
 QueueTest: build/QueueTest/success
 
-build/QueueTest/success: Lists/Queue.java Lists/AQueue.java Lists/Link.java Lists/LQueue.java Lists/QueueTest.java ../Java_Generic/errorInfo/ErrorRec.java
+build/QueueTest/success: genericLists/Queue.java genericLists/AQueue.java genericLists/Link.java genericLists/LQueue.java genericLists/QueueTest.java errorInfo/ErrorRec.java
 	@echo "Array-based and Linked Queue Test"
 	-@rm -rf build/QueueTest
 	@mkdir build/QueueTest
-	@mkdir build/QueueTest/lists build/QueueTest/errorInfo
-	@cp Lists/Queue.java build/QueueTest/lists
-	@cp Lists/AQueue.java build/QueueTest/lists
-	@cp Lists/LQueue.java build/QueueTest/lists
-	@cp Lists/Link.java build/QueueTest/lists
-	@cp ../Java_Generic/errorInfo/ErrorRec.java build/QueueTest/errorInfo
-	@cp Lists/QueueTest.java build/QueueTest/lists
+	@mkdir build/QueueTest/genericLists build/QueueTest/errorInfo
+	@cp genericLists/Queue.java build/QueueTest/genericLists
+	@cp genericLists/AQueue.java build/QueueTest/genericLists
+	@cp genericLists/LQueue.java build/QueueTest/genericLists
+	@cp genericLists/Link.java build/QueueTest/genericLists
+	@cp errorInfo/ErrorRec.java build/QueueTest/errorInfo
+	@cp genericLists/QueueTest.java build/QueueTest/genericLists
 	cd build/QueueTest; \
-	javac $(CFLAGS) lists/QueueTest.java; \
-	$(JAVA) $(RFLAGS) lists/QueueTest
+	javac $(CFLAGS) genericLists/QueueTest.java; \
+	$(JAVA) $(RFLAGS) genericLists/QueueTest
+
 
 Binary: Traverse BST
 
@@ -203,29 +204,29 @@ build/SelsortTest/success: Sorting/Selectionsort.java Sorting/SortTest.1 Sorting
 	javac $(CFLAGS) SortTest.java; \
 	$(JAVA) $(RFLAGS) SortTest
 
-InssortTime: Sorting/Insertionsort.java Sorting/SortTime.1 Sorting/SortTime.2 Utils/Swap.java Utils/Processing.java Utils/Checkorder.java
+InssortTime: Sorting/Insertionsort.java Sorting/SortTime.1 Sorting/SortTime.2 Utils/Swap.java Utils/Processing.java
 	@echo "Inssort Timing Test"
 	-@rm -rf build/InssortTime
 	@mkdir build/InssortTime
-	cat Sorting/SortTime.1 Utils/Swap.java Utils/Processing.java Utils/Checkorder.java Sorting/Insertionsort.java Sorting/SortTime.2 > build/InssortTime/SortTime.java
+	cat Sorting/SortTime.1 Utils/Swap.java Utils/Processing.java Sorting/Insertionsort.java Sorting/SortTime.2 > build/InssortTime/SortTime.java
 	cd build/InssortTime; \
 	javac $(CFLAGS) SortTime.java; \
 	$(JAVA) $(RFLAGS) SortTime
 
-BubblesortTime: Sorting/Bubblesort.java Sorting/SortTime.1 Sorting/SortTime.2 Utils/Swap.java Utils/Processing.java Utils/Checkorder.java
+BubblesortTime: Sorting/Bubblesort.java Sorting/SortTime.1 Sorting/SortTime.2 Utils/Swap.java Utils/Processing.java
 	@echo "Bubble Sort Timing Test"
 	-@rm -rf build/BubblesortTime
 	@mkdir build/BubblesortTime
-	cat Sorting/SortTime.1 Utils/Swap.java Utils/Processing.java Utils/Checkorder.java Sorting/Bubblesort.java Sorting/SortTime.2 > build/BubblesortTime/SortTime.java
+	cat Sorting/SortTime.1 Utils/Swap.java Utils/Processing.java Sorting/Bubblesort.java Sorting/SortTime.2 > build/BubblesortTime/SortTime.java
 	cd build/BubblesortTime; \
 	javac $(CFLAGS) SortTime.java; \
 	$(JAVA) $(RFLAGS) SortTime
 
-SelsortTime: Sorting/Selectionsort.java Sorting/SortTime.1 Sorting/SortTime.2 Utils/Swap.java Utils/Processing.java Utils/Checkorder.java
+SelsortTime: Sorting/Selectionsort.java Sorting/SortTime.1 Sorting/SortTime.2 Utils/Swap.java Utils/Processing.java
 	@echo "Selection Sort Timing Test"
 	-@rm -rf build/SelsortTime
 	@mkdir build/SelsortTime
-	cat Sorting/SortTime.1 Utils/Swap.java Utils/Processing.java Utils/Checkorder.java Sorting/Selectionsort.java Sorting/SortTime.2 > build/SelsortTime/SortTime.java
+	cat Sorting/SortTime.1 Utils/Swap.java Utils/Processing.java Sorting/Selectionsort.java Sorting/SortTime.2 > build/SelsortTime/SortTime.java
 	cd build/SelsortTime; \
 	javac $(CFLAGS) SortTime.java; \
 	$(JAVA) $(RFLAGS) SortTime
@@ -253,4 +254,3 @@ build/Sequential/success: Searching/Sequential.java
 	cd build/Sequential; \
 	javac $(CFLAGS) Sequential.java; \
 	$(JAVA) $(RFLAGS) Sequential
-

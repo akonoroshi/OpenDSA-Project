@@ -66,7 +66,7 @@ public class ListTest {
 
 		// Compare list with java.util.list to test length, getValue,
 		// toString, currPos, and remove. Add items by inserting
-		LinkedList<String> tester = new LinkedList<String>();
+		LinkedList<Object> tester = new LinkedList<Object>();
 		for (int i = 0; i < TEST_SIZE; i++) {
 			checkIns(l, tester, "Str" + i);
 		}
@@ -83,7 +83,7 @@ public class ListTest {
 		doSomethingOnNonEmpList(l, tester);
 	}
 
-	static void reset(List l, LinkedList tester) {
+	static void reset(List l, LinkedList<Object> tester) {
 		l.clear();
 		tester.clear();
 	}
@@ -136,7 +136,7 @@ public class ListTest {
 		}
 	}
 
-	static void doSomethingOnNonEmpList(List l, LinkedList tester) {
+	static void doSomethingOnNonEmpList(List l, LinkedList<Object> tester) {
 		// Test moveToStart and remove
 		l.moveToStart();
 		check(l, tester, 0);
@@ -178,7 +178,7 @@ public class ListTest {
 		tester.addLast(expected);
 
 		// Keep removing items from the middle of the list
-		LinkedList temp = new LinkedList();
+		LinkedList<Object> temp = new LinkedList<Object>();
 		int size = tester.size();
 		int curr = size / 2;
 		l.moveToPos(curr);
@@ -216,21 +216,21 @@ public class ListTest {
 		}
 	}
 
-	static void checkIns(List l, LinkedList tester, Object item) {
+	static void checkIns(List l, LinkedList<Object> tester, Object item) {
 		// Insert the item to both lists
 		tester.add(l.currPos(), item);
 		l.insert(item);
 		check(l, tester, l.currPos());
 	}
 
-	static void checkApp(List l, LinkedList tester, Object item) {
+	static void checkApp(List l, LinkedList<Object> tester, Object item) {
 		// Append the item to both lists
 		tester.add(item);
 		l.append(item);
 		check(l, tester, l.currPos());
 	}
 
-	static void check(List l, LinkedList tester, int curr) {
+	static void check(List l, LinkedList<Object> tester, int curr) {
 		// Check the length of list
 		if (l.length() != tester.size()) {
 			record.printError("An unexpected length of " + l.getClass() + ". \nLength of list: " + l.length()
