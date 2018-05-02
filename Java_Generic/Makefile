@@ -44,7 +44,7 @@ build/Anal/success: Misc/Anal.java
 	javac $(CFLAGS) Anal.java; \
 	$(JAVA) $(RFLAGS) Anal
 
-Lists: ListTest DoubleTest FreeList StackTest QueueTest
+Lists: ListTest StackTest QueueTest
 
 ListTest: build/ListTest/success
 
@@ -66,36 +66,6 @@ build/ListTest/success: genericLists/ListTest.java genericLists/List.java generi
 	cd build/ListTest; \
 	javac $(CFLAGS) genericLists/ListTest.java; \
 	$(JAVA) $(RFLAGS) genericLists/ListTest
-
-DoubleTest: build/DoubleTest/success
-
-build/DoubleTest/success: Lists/ListTest.java Lists/List.java Lists/AList.java Lists/DList.java Lists/DLink.java
-	@echo "Doubly Linked List Test"
-	-@rm -rf build/DoubleTest
-	@mkdir build/DoubleTest
-	cp Lists/ListTest.java build/DoubleTest
-	cp Lists/List.java build/DoubleTest
-	cp Lists/AList.java build/DoubleTest
-	cp Lists/DList.java build/DoubleTest/LList.java
-	cp Lists/DLink.java build/DoubleTest/Link.java
-	cd build/DoubleTest; \
-	javac $(CFLAGS) ListTest.java; \
-	$(JAVA) $(RFLAGS) ListTest
-
-FreeList: build/FreeList/success
-
-build/FreeList/success: Lists/List.java Lists/AList.java Lists/Freelink.java Lists/Freelist.java Lists/ListTest.java
-	@echo "Freelist Test"
-	-@rm -rf build/FreeList
-	@mkdir build/FreeList
-	@cp Lists/List.java build/FreeList
-	@cp Lists/AList.java build/FreeList
-	@cp Lists/Freelist.java build/FreeList/LList.java
-	@cp Lists/Freelink.java build/FreeList/Link.java
-	@cp Lists/ListTest.java build/FreeList
-	cd build/FreeList; \
-	javac $(CFLAGS) ListTest.java; \
-	$(JAVA) $(RFLAGS) ListTest
 
 StackTest: build/StackTest/success
 
@@ -130,7 +100,6 @@ build/QueueTest/success: genericLists/Queue.java genericLists/AQueue.java generi
 	cd build/QueueTest; \
 	javac $(CFLAGS) genericLists/QueueTest.java; \
 	$(JAVA) $(RFLAGS) genericLists/QueueTest
-
 
 Binary: Traverse BST
 
