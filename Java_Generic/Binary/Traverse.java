@@ -34,6 +34,7 @@ public class Traverse {
 	static <E> void preorder(BinNode<E> rt) {
 		preorder(rt.left());
 		preorder(rt.right());
+		// TODO this must come first
 		if (rt == null)
 			return;
 		visit(rt);

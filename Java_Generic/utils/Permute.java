@@ -12,7 +12,7 @@ public class Permute {
       @param n The upper bound for the range.
       @return A value in the range 0 to n-1.
   */
-  static int random(int n) {
+  public static int random(int n) {
         return Math.abs(value.nextInt()) % n;
   }
 
