@@ -1,25 +1,25 @@
 package genericLists;
 // Linked list implementation that uses a Freelist
 
-class FList<E> implements List<E> {
-  private FLink<E> head;         // Pointer to list header
-  private FLink<E> tail;         // Pointer to last element
-  private FLink<E> curr;         // Access to current element
+class Freelist<E> implements List<E> {
+  private Freelink<E> head;         // Pointer to list header
+  private Freelink<E> tail;         // Pointer to last element
+  private Freelink<E> curr;         // Access to current element
   private int listSize;         // Size of list
 
   // Constructors
-  FList(int size) { this(); }   // Constructor -- Ignore size
-  FList() { clear(); }
+  Freelist(int size) { this(); }   // Constructor -- Ignore size
+  Freelist() { clear(); }
 
   // Remove all elements
   public void clear() {
     while (head != null) {
-      FLink<E> temp = head.next();
+      Freelink<E> temp = head.next();
       head.release();
       head = temp;
     }
-    curr = tail = FLink.get(null, null); // Create trailer
-    head = FLink.get(null, tail);        // Create header
+    curr = tail = Freelink.get(null, null); // Create trailer
+    head = Freelink.get(null, tail);        // Create header
     listSize = 0;
   }
   
@@ -29,7 +29,7 @@ class FList<E> implements List<E> {
 /* *** ODSATag: Freelist *** */
   // Insert "it" at current position
   public boolean insert(E it) {
-    curr.setNext(FLink.get(curr.element(), curr.next())); // Get link
+    curr.setNext(Freelink.get(curr.element(), curr.next())); // Get link
     curr.setElement(it);
     if (tail == curr) tail = curr.next();    // New tail
     listSize++;
@@ -38,7 +38,7 @@ class FList<E> implements List<E> {
 
   // Append "it" to list
   public boolean append(E it) {
-    FLink<E> temp = FLink.get(null, null);
+    Freelink<E> temp = Freelink.get(null, null);
     tail.setNext(temp);
     tail.setElement(it);
     tail = tail.next();
@@ -52,7 +52,7 @@ class FList<E> implements List<E> {
     E it = curr.element();                  // Remember value
     curr.setElement(curr.next().element()); // Pull forward the next element
     if (curr.next() == tail) tail = curr;   // Removed last, move tail
-    FLink<E> tempptr = curr.next();             // Remember the link
+    Freelink<E> tempptr = curr.next();             // Remember the link
     curr.setNext(curr.next().next());       // Point around unneeded link
     tempptr.release();                      // Release the link
     listSize--;                             // Decrement element count
@@ -66,7 +66,7 @@ class FList<E> implements List<E> {
   // Move curr one step left; no change if now at front
   public void prev() {
     if (head.next() == curr) return;         // No previous element
-    FLink<E> temp = head;
+    Freelink<E> temp = head;
     // March down list until we find the previous element
     while (temp.next() != curr) temp = temp.next();
     curr = temp;
@@ -80,7 +80,7 @@ class FList<E> implements List<E> {
 
   // Return the position of the current element
   public int currPos() {
-    FLink<E> temp = head.next();
+    Freelink<E> temp = head.next();
     int i;
     for (i=0; curr != temp; i++)
       temp = temp.next();
@@ -108,7 +108,7 @@ class FList<E> implements List<E> {
   public boolean isEmpty() { return listSize == 0; }
   
   public String toString() {
-		FLink<E> temp = head.next();
+		Freelink<E> temp = head.next();
 		StringBuffer out = new StringBuffer((listSize + 1) * 4);
 
 		out.append("< ");

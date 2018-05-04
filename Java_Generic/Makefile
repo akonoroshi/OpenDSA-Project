@@ -48,7 +48,7 @@ Lists: ListTest StackTest QueueTest
 
 ListTest: build/ListTest/success
 
-build/ListTest/success: genericLists/ListTest.java genericLists/List.java genericLists/AList.java genericLists/LList.java genericLists/Link.java genericLists/DList.java genericLists/DLink.java genericLists/FLink.java genericLists/FList.java errorInfo/ErrorRec.java
+build/ListTest/success: genericLists/ListTest.java genericLists/List.java genericLists/AList.java genericLists/LList.java genericLists/Link.java genericLists/DList.java genericLists/DLink.java genericLists/Freelink.java genericLists/Freelist.java errorInfo/ErrorRec.java
 	@echo "Array-based, Singly and Doubly Linked, and Free List Test"
 	-@rm -rf build/ListTest
 	@mkdir build/ListTest
@@ -59,8 +59,8 @@ build/ListTest/success: genericLists/ListTest.java genericLists/List.java generi
 	@cp genericLists/Link.java build/ListTest/genericLists
 	@cp genericLists/DList.java build/ListTest/genericLists
 	@cp genericLists/DLink.java build/ListTest/genericLists
-	@cp genericLists/FList.java build/ListTest/genericLists
-	@cp genericLists/FLink.java build/ListTest/genericLists
+	@cp genericLists/Freelist.java build/ListTest/genericLists
+	@cp genericLists/Freelink.java build/ListTest/genericLists
 	@cp errorInfo/ErrorRec.java build/ListTest/errorInfo
 	@cp genericLists/ListTest.java build/ListTest/genericLists
 	cd build/ListTest; \

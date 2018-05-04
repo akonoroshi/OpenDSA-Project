@@ -302,7 +302,7 @@ public class ListTest {
 		AList al = new AList();
 		LList ll = new LList();
 		DList dl = new DList();
-		FList fl = new FList();
+		Freelist fl = new Freelist();
 		testInt(al);
 		testInt(ll);
 		testInt(dl);
@@ -312,7 +312,7 @@ public class ListTest {
 		AList al1 = new AList();
 		LList ll1 = new LList();
 		DList dl1 = new DList();
-		FList fl1 = new FList();
+		Freelist fl1 = new Freelist();
 		testStr(al1);
 		testStr(ll1);
 		testStr(dl1);
