@@ -119,18 +119,24 @@ build/Traverse/success: Binary/BinNode.java Binary/BSTNode.java Binary/Traverse1
 
 BST: build/BSTTest/success
 
-build/BSTTest/success: Binary/BST.java Binary/BSTTest1.java Binary/checkBST.java Binary/Preorder.java Binary/BSTTest.java Binary/BSTNode.java Binary/BinNode.java Utils/Permute.java Utils/Swap.java Binary/Traverse.java Utils/KVPair.java
+build/BSTTest/success: Binary/BST.java Binary/checkBST.java Binary/Preorder.java Binary/BSTTest.java Binary/BSTNode.java Binary/BinNode.java Utils/Permute.java Utils/Swap.java Binary/Traverse.java Utils/KVPair.java errorInfo/ErrorRec.java
 	@echo "BST Test"
 	-@rm -rf build/BSTTest
 	@mkdir build/BSTTest
-	@cp Binary/BST.java build/BSTTest
-	@cp Binary/BSTNode.java build/BSTTest
-	@cp Binary/BinNode.java build/BSTTest
-	@cat Binary/BSTTest1.java Utils/Permute.java Utils/Swap.java Binary/checkBST.java Binary/Preorder.java Binary/BSTTest.java > build/BSTTest/BSTTest.java
-	@cp Utils/KVPair.java build/BSTTest
+	@mkdir build/BSTTest/Binary build/BSTTest/errorInfo build/BSTTest/Utils
+	@cp Binary/BST.java build/BSTTest/Binary
+	@cp Binary/BSTNode.java build/BSTTest/Binary
+	@cp Binary/BinNode.java build/BSTTest/Binary
+	@cp Binary/checkBST.java build/BSTTest/Binary
+	@cp Binary/Preorder.java build/BSTTest/Binary
+	@cp Utils/KVPair.java build/BSTTest/Utils
+	@cp Utils/Permute.java build/BSTTest/Utils
+	@cp Utils/Swap.java build/BSTTest/Utils
+	@cp errorInfo/ErrorRec.java build/BSTTest/errorInfo
+	@cp Binary/BSTTest.java  build/BSTTest/Binary
 	cd build/BSTTest; \
-	javac $(CFLAGS) BSTTest.java; \
-	$(JAVA) $(RFLAGS) BSTTest
+	javac $(CFLAGS) Binary/BSTTest.java; \
+	$(JAVA) $(RFLAGS) Binary/BSTTest
 
 
 Sorting: Inssort Bubblesort Selsort

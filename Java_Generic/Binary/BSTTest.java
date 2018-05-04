@@ -9,8 +9,9 @@ import errorInfo.ErrorRec;
 
 public class BSTTest {
 	static final int TESTSIZE = 100;
-	static final int OFFSET = 1000000;
-	static long time1, time2, totaltime; // These get set by the testing routine
+	static final int OFFSET = 100;
+	// These get set by the testing routine
+	static long time1, time2, totaltime;
 	// Instance of ErrorRec class which holds the number of errors and prints
 	// out error messages
 	static ErrorRec record;
@@ -21,22 +22,23 @@ public class BSTTest {
 	}
 
 	static <E extends Comparable<E>> boolean checkBST(BSTNode<E> rt, Vector<E> sorted) {
-		// TODO stack or list containing value
 		if (rt == null)
 			return true; // Empty subtree
+		// Inorder traversal
 		checkBST(rt.left(), sorted);
-		// TODO compare values
+		// Compare values
 		if (rt.value().compareTo(sorted.remove(0)) != 0) {
 			return false;
 		}
 		checkBST(rt.right(), sorted);
-		// TODO is stack or list empty?
+		// If the vector is empty, BST stores all of the necessary items
 		return sorted.isEmpty();
 	}
 
 	public static void main(String args[]) throws IOException {
 		// Create a useFile to record errors if necessary
 		record = new ErrorRec(useFile, "StackTest");
+		// Create an array that stores random numbers
 		Integer[] A = new Integer[TESTSIZE];
 		int i;
 		BST<KVPair<Integer, Integer>> b = new BST<KVPair<Integer, Integer>>();
@@ -58,9 +60,10 @@ public class BSTTest {
 			b.insert(new KVPair<Integer, Integer>(new Integer(A[i]), new Integer(i + OFFSET)));
 			sortedPair.add(new KVPair<Integer, Integer>(new Integer(A[i]), new Integer(i + OFFSET)));
 		}
+
+		// Sort the KVPairs
 		Collections.sort(sortedPair);
-		// Make sure that the thing is really a BST
-		// TODO checkBST does not work for KVPair
+		// Inorder traversal gives the sorted order.
 		if (!checkBST(b.root(), sortedPair)) {
 			record.printError("Oops! It was not a BST!");
 		}
@@ -81,8 +84,9 @@ public class BSTTest {
 		// Now we are going to run timing tests on our two traversals
 		Permute.permute(A);
 		BST<KVPair<Integer, Integer>> btest = new BST<KVPair<Integer, Integer>>();
-		for (i = 0; i < A.length; i++)
+		for (i = 0; i < A.length; i++) {
 			btest.insert(new KVPair<Integer, Integer>(new Integer(A[i]), new Integer(i + OFFSET)));
+		}
 		time1 = System.currentTimeMillis();
 		Preorder.preorder(btest.root());
 		time2 = System.currentTimeMillis();
@@ -109,15 +113,15 @@ public class BSTTest {
 		// Now, generate a permutation on the numbers
 		Permute.permute(AA);
 
-		// Sort the vector
-		Collections.sort(sortedInt);
-
 		// Now, build the BST
 		// Each record will have a random key value from the permutation.
-		for (i = 0; i < AA.length; i++)
+		for (i = 0; i < AA.length; i++) {
 			bb.insert(new Integer(AA[i]));
+		}
 
-		// Make sure that the thing is really a BST
+		// Sort the vector
+		Collections.sort(sortedInt);
+		// Inorder traversal gives the sorted order.
 		if (!checkBST(bb.root(), sortedInt)) {
 			record.printError("Oops! It was not a BST!");
 		}
