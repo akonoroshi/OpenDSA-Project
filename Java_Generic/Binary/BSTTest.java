@@ -8,12 +8,13 @@ import utils.Permute;
 import errorInfo.ErrorRec;
 
 public class BSTTest {
-	static final int TESTSIZE = 1000000;
+	static final int TESTSIZE = 100;
 	static final int OFFSET = 1000000;
 	static long time1, time2, totaltime; // These get set by the testing routine
 	// Instance of ErrorRec class which holds the number of errors and prints
 	// out error messages
 	static ErrorRec record;
+	static boolean useFile = true;
 
 	static <T> void visit(BinNode<T> rt) {
 		// System.out.print(rt.value() + " ");
@@ -25,7 +26,7 @@ public class BSTTest {
 			return true; // Empty subtree
 		checkBST(rt.left(), sorted);
 		// TODO compare values
-		if (!rt.value().equals(sorted.remove(0))) {
+		if (rt.value().compareTo(sorted.remove(0)) != 0) {
 			return false;
 		}
 		checkBST(rt.right(), sorted);
@@ -34,6 +35,8 @@ public class BSTTest {
 	}
 
 	public static void main(String args[]) throws IOException {
+		// Create a useFile to record errors if necessary
+		record = new ErrorRec(useFile, "StackTest");
 		Integer[] A = new Integer[TESTSIZE];
 		int i;
 		BST<KVPair<Integer, Integer>> b = new BST<KVPair<Integer, Integer>>();
@@ -57,10 +60,11 @@ public class BSTTest {
 		}
 		Collections.sort(sortedPair);
 		// Make sure that the thing is really a BST
-		/*
-		 * if (!checkBST(b.root(), sortedPair)) {
-		 * System.out.println("Oops! It was not a BST!"); SUCCESS = false; }
-		 */
+		// TODO checkBST does not work for KVPair
+		if (!checkBST(b.root(), sortedPair)) {
+			record.printError("Oops! It was not a BST!");
+		}
+
 		// Now, let's test delete by randomly removing all the keys
 		Permute.permute(A);
 		for (i = 0; i < A.length; i++) {
