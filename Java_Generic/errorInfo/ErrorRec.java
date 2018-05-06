@@ -1,4 +1,4 @@
-package errorInfo;
+
 
 import java.io.*;
 

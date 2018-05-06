@@ -90,16 +90,15 @@ build/QueueTest/success: genericLists/Queue.java genericLists/AQueue.java generi
 	@echo "Array-based and Linked Queue Test"
 	-@rm -rf build/QueueTest
 	@mkdir build/QueueTest
-	@mkdir build/QueueTest/genericLists build/QueueTest/errorInfo
-	@cp genericLists/Queue.java build/QueueTest/genericLists
-	@cp genericLists/AQueue.java build/QueueTest/genericLists
-	@cp genericLists/LQueue.java build/QueueTest/genericLists
-	@cp genericLists/Link.java build/QueueTest/genericLists
-	@cp errorInfo/ErrorRec.java build/QueueTest/errorInfo
-	@cp genericLists/QueueTest.java build/QueueTest/genericLists
+	@cp genericLists/Queue.java build/QueueTest/
+	@cp genericLists/AQueue.java build/QueueTest/
+	@cp genericLists/LQueue.java build/QueueTest/
+	@cp genericLists/Link.java build/QueueTest/
+	@cp errorInfo/ErrorRec.java build/QueueTest/
+	@cp genericLists/QueueTest.java build/QueueTest/
 	cd build/QueueTest; \
-	javac $(CFLAGS) genericLists/QueueTest.java; \
-	$(JAVA) $(RFLAGS) genericLists/QueueTest
+	javac $(CFLAGS) QueueTest.java; \
+	$(JAVA) $(RFLAGS) QueueTest
 
 Binary: Traverse BST
 

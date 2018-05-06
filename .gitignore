@@ -1,3 +1,6 @@
 /bin/
 /Java/build/
 /Java_Generic/build
+.DS_Store
+/Java_Generic/.DS_Store
+/.DS_Store

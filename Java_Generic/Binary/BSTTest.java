@@ -41,7 +41,9 @@ public class BSTTest {
 		// Create an array that stores random numbers
 		Integer[] A = new Integer[TESTSIZE];
 		int i;
+		// BST to be tested
 		BST<KVPair<Integer, Integer>> b = new BST<KVPair<Integer, Integer>>();
+		// Create a vector that holds sorted KVPair
 		Vector<KVPair<Integer, Integer>> sortedPair = new Vector<KVPair<Integer, Integer>>();
 
 		// Initialize to simply be the values from 0 to TESTSIZE-1
@@ -101,6 +103,7 @@ public class BSTTest {
 		// Finally, let's test with simple Integer values
 		Integer[] AA = new Integer[TESTSIZE];
 		BST<Integer> bb = new BST<Integer>();
+		// Create a vector that holds sorted Integer
 		Vector<Integer> sortedInt = new Vector<Integer>();
 
 		// Initialize to simply be the values from 0 to TESTSIZE-1

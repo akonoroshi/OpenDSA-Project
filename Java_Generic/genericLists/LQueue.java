@@ -1,4 +1,4 @@
-package genericLists;
+
 
 /* *** ODSATag: LQueue1 *** */
 // Linked queue implementation

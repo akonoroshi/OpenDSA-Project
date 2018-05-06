@@ -1,4 +1,4 @@
-package genericLists;
+
 /* *** ODSATag: Queue *** */
 public interface Queue<E> { // Queue class ADT
   // Reinitialize queue

@@ -1,4 +1,4 @@
-package genericLists;
+
 
 /* *** ODSATag: Link *** */
 class Link<E> {         // Singly linked list node class
