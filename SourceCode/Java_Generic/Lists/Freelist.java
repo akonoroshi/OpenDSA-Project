@@ -1,5 +1,3 @@
-
-
 class Freelist<E> implements List<E> {
   private Freelink<E> head;         // Pointer to list header
   private Freelink<E> tail;         // Pointer to last element

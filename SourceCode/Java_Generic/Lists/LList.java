@@ -1,6 +1,3 @@
-
-
-
 /* *** ODSATag: LList *** */
 // Linked list implementation
 /* *** ODSATag: LListVars *** */

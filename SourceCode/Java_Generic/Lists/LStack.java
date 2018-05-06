@@ -1,5 +1,3 @@
-
-
 /* *** ODSATag: LStack1 *** */
 // Linked stack implementation
 class LStack<E> implements Stack<E> {

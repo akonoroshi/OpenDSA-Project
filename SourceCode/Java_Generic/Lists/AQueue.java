@@ -1,5 +1,3 @@
-
-
 // Array-based queue implementation
 /* *** ODSATag: AQueue1 *** */
 class AQueue<E> implements Queue<E> {

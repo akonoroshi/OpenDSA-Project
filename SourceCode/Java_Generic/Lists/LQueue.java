@@ -1,5 +1,3 @@
-
-
 /* *** ODSATag: LQueue1 *** */
 // Linked queue implementation
 class LQueue<E> implements Queue<E> {

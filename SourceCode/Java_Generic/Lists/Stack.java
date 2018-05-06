@@ -1,4 +1,3 @@
-
 /* *** ODSATag: Stack *** */
 public interface Stack<E> { // Stack class ADT
   // Reinitialize the stack.

@@ -1,5 +1,3 @@
-
-
 // Doubly Linked list implementation
 class DList<E> implements List<E> {
   private DLink<E> head;                    // Pointer to list header
