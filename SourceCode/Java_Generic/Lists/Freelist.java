@@ -1,5 +1,4 @@
-package genericLists;
-// Linked list implementation that uses a Freelist
+
 
 class Freelist<E> implements List<E> {
   private Freelink<E> head;         // Pointer to list header

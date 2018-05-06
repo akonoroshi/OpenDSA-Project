@@ -1,4 +1,4 @@
-package genericLists;
+
 
 /* *** ODSATag: AList *** */
 // Array-based list implementation

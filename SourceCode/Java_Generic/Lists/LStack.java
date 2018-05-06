@@ -1,4 +1,4 @@
-package genericLists;
+
 
 /* *** ODSATag: LStack1 *** */
 // Linked stack implementation

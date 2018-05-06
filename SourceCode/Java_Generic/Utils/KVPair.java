@@ -1,4 +1,4 @@
-package utils;
+
 /* *** ODSATag: KVPair *** */
 // KVPair class definition
 public class KVPair<K extends Comparable<K>, E> implements Comparable<KVPair<K, E>> {

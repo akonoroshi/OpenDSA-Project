@@ -1,4 +1,4 @@
-package genericLists;
+
 // WARNING: The defnition for freelist generates unchecked warnings
 // I don't know of a way to get around this, or to suppress (all of) the warnings.
 /* *** ODSATag: Freelink *** */

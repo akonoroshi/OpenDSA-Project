@@ -1,5 +1,3 @@
-package genericLists;
-
 // Array-based stack implementation
 /* *** ODSATag: AStack1 *** */
 class AStack<E> implements Stack<E> {

@@ -1,4 +1,4 @@
-package genericLists;
+
 
 // Doubly Linked list implementation
 class DList<E> implements List<E> {

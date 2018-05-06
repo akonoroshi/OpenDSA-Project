@@ -1,4 +1,4 @@
-package genericLists;
+
 /* *** ODSATag: ListADT *** */
 // List class ADT. Generalize the element type using Java Generics.
 public interface List<E> { // List class ADT
