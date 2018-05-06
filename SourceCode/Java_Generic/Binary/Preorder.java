@@ -1,5 +1,3 @@
-package Binary;
-
 public class Preorder {
 /* *** ODSATag: preorder *** */
 static <E> void preorder(BinNode<E> rt) {

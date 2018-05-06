@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="Java_Generic"/>
 	<classpathentry kind="src" path="SourceCode/Java_Generic/Lists"/>
 	<classpathentry kind="src" path="SourceCode/Java_Generic/Utils"/>
+	<classpathentry kind="src" path="SourceCode/Java_Generic/Binary"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Java"/>
 	<classpathentry kind="output" path="bin"/>

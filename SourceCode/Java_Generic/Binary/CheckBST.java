@@ -1,5 +1,3 @@
-package Binary;
-
 public class CheckBST {
 // Assumes that equal values go to the left
 /* *** ODSATag: checkBST *** */

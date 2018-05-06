@@ -1,12 +1,6 @@
-package Binary;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Vector;
-
-import utils.ErrorRec;
-import utils.KVPair;
-import utils.Permute;
 
 public class BSTTest {
 	static final int TESTSIZE = 100;

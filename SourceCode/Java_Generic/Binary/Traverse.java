@@ -1,8 +1,5 @@
-package Binary;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import utils.KVPair;
 
 public class Traverse {
 	static boolean SUCCESS = true;
