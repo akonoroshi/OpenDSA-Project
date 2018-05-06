@@ -86,7 +86,7 @@ build/StackTest/success: genericLists/Stack.java genericLists/AStack.java generi
 
 QueueTest: build/QueueTest/success
 
-build/QueueTest/success: genericLists/Queue.java genericLists/AQueue.java genericLists/Link.java genericLists/LQueue.java genericLists/QueueTest.java errorInfo/ErrorRec.java
+build/QueueTest/success: genericLists/Queue.java genericLists/AQueue.java genericLists/Link.java genericLists/LQueue.java genericLists/QueueTest.java utils/ErrorRec.java
 	@echo "Array-based and Linked Queue Test"
 	-@rm -rf build/QueueTest
 	@mkdir build/QueueTest
@@ -94,7 +94,7 @@ build/QueueTest/success: genericLists/Queue.java genericLists/AQueue.java generi
 	@cp genericLists/AQueue.java build/QueueTest/
 	@cp genericLists/LQueue.java build/QueueTest/
 	@cp genericLists/Link.java build/QueueTest/
-	@cp errorInfo/ErrorRec.java build/QueueTest/
+	@cp utils/ErrorRec.java build/QueueTest/
 	@cp genericLists/QueueTest.java build/QueueTest/
 	cd build/QueueTest; \
 	javac $(CFLAGS) QueueTest.java; \

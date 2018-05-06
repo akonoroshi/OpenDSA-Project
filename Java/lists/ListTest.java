@@ -1,7 +1,8 @@
 package lists;
 import java.io.*;
 import java.util.LinkedList;
-import errorInfo.ErrorRec;
+
+import utils.ErrorRec;
 
 /**
  * This program checks if all the methods in AList, LList and DList classes work

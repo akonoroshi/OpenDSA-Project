@@ -2,7 +2,8 @@ package lists;
 import java.io.*;
 import java.util.Deque;
 import java.util.LinkedList;
-import errorInfo.ErrorRec;
+
+import utils.ErrorRec;
 
 /**
  * This program checks if all the methods in AQueue and LQueue classes work

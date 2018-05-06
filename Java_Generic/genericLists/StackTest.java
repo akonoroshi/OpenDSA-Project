@@ -1,7 +1,8 @@
 package genericLists;
 
 import java.io.*;
-import errorInfo.ErrorRec;
+
+import utils.ErrorRec;
 
 /**
  * This program checks if all the methods in AStack and LStack classes work
