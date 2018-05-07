@@ -1,5 +1,3 @@
-
-
 public class Swap {
 // Swap for int arrays
 static void swap(int[] A, int i, int j) {

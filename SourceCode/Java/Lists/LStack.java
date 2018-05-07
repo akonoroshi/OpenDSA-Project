@@ -1,5 +1,3 @@
-package lists;
-
 /* *** ODSATag: LStack1 *** */
 // Linked stack implementation
 class LStack implements Stack {

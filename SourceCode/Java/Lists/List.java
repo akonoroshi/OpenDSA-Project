@@ -1,4 +1,3 @@
-package lists;
 /* *** ODSATag: ListADT *** */
 /* *** ODSATag: ListADT1 *** */
 // List class ADT. Generalize by using "Object" for the element type.

@@ -1,4 +1,3 @@
-package lists;
 /* *** ODSATag: Queue *** */
 public interface Queue { // Queue class ADT
   // Reinitialize queue

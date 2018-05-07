@@ -1,5 +1,3 @@
-package lists;
-
 // Linked list implementation that uses a Freelist
 class Freelist implements List {
   private Freelink head;         // Pointer to list header

@@ -1,4 +1,3 @@
-package lists;
 /* *** ODSATag: DLink *** */
 class DLink {            // Doubly linked list node
   private Object e;     // Value for this node

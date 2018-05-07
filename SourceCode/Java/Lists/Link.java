@@ -1,4 +1,3 @@
-package lists;
 /* *** ODSATag: Link *** */
 class Link {         // Singly linked list node class
   private Object e;  // Value for this node

@@ -1,4 +1,3 @@
-package lists;
 /* *** ODSATag: Freelink *** */
 class Freelink {         // Singly linked list node with freelist support
   private Object e;  // Value for this node

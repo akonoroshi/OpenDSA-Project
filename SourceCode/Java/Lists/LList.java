@@ -1,5 +1,3 @@
-package lists;
-
 /* *** ODSATag: LList *** */
 // Linked list implementation
 /* *** ODSATag: LListVars *** */

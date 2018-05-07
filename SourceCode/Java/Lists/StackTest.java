@@ -1,7 +1,4 @@
-package lists;
 import java.io.*;
-
-import utils.ErrorRec;
 
 /**
  * This program checks if all the methods in AStack and LStack classes work
@@ -19,7 +16,7 @@ public class StackTest {
 	// out error messages
 	static ErrorRec record;
 
-	static void testInt(lists.Stack s) {
+	static void testInt(Stack s) {
 		// Check empty stack
 		checkEmp(s);
 
@@ -31,7 +28,7 @@ public class StackTest {
 		}
 	}
 
-	static void testStr(lists.Stack s) {
+	static void testStr(Stack s) {
 		// Check empty stack
 		checkEmp(s);
 
@@ -43,7 +40,7 @@ public class StackTest {
 		}
 	}
 
-	static void check(lists.Stack s, java.util.Stack<Object> tester, Object item) {
+	static void check(Stack s, java.util.Stack<Object> tester, Object item) {
 		// Add the item to both stacks
 		s.push(item);
 		tester.push(item);
@@ -98,7 +95,7 @@ public class StackTest {
 		}
 	}
 
-	static void checkEmp(lists.Stack s) {
+	static void checkEmp(Stack s) {
 		// Test length with empty stack
 		if (s.length() != 0) {
 			record.printError("An unexpected length of " + s.getClass() + ". \nLength of stack: " + s.length()

@@ -1,5 +1,3 @@
-package lists;
-
 // Array-based stack implementation
 /* *** ODSATag: AStack1 *** */
 class AStack implements Stack {

@@ -1,5 +1,3 @@
-package lists;
-
 // Array-based queue implementation
 /* *** ODSATag: AQueue1 *** */
 class AQueue implements Queue {

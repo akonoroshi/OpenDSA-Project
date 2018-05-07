@@ -1,4 +1,3 @@
-package lists;
 /* *** ODSATag: Stack *** */
 public interface Stack { // Stack class ADT
   // Reinitialize the stack.

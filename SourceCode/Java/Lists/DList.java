@@ -1,5 +1,3 @@
-package lists;
-
 // Doubly Linked list implementation
 class DList implements List {
   private DLink head;         // Pointer to list header
