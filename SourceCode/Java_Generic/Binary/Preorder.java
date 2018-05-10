@@ -1,4 +1,3 @@
-public class Preorder {
 /* *** ODSATag: preorder *** */
 static <E> void preorder(BinNode<E> rt) {
   if (rt == null) return; // Empty subtree - do nothing
@@ -14,10 +13,5 @@ static <E> void preorder2(BinNode<E> rt) {
   visit(rt);
   if (rt.left() != null) preorder2(rt.left());
   if (rt.right() != null) preorder2(rt.right());
-}
-
-static <E> void visit(BinNode<E> rt) {
-	System.out.print(rt.value() + " ");
-}
 }
 /* *** ODSAendTag: preorder2 *** */
