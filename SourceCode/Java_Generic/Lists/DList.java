@@ -1,18 +1,18 @@
 // Doubly Linked list implementation
-class DList<E> implements List<E> {
-  private DLink<E> head;                    // Pointer to list header
-  private DLink<E> tail;                    // Pointer to last element
-  private DLink<E> curr;                    // Access to current element
+class LList<E> implements List<E> {
+  private Link<E> head;                    // Pointer to list header
+  private Link<E> tail;                    // Pointer to last element
+  private Link<E> curr;                    // Access to current element
   private int listSize;                    // Size of list
 
   // Constructors
-  DList(int size) { this(); }              // Constructor -- Ignore size
-  DList() { clear(); }
+  LList(int size) { this(); }              // Constructor -- Ignore size
+  LList() { clear(); }
 
   // Remove all elements
   public void clear() {
-    curr = tail = new DLink<E>(null, null); // Create trailer
-    head = new DLink<E>(null, tail);        // Create header
+    curr = tail = new Link<E>(null, null); // Create trailer
+    head = new Link<E>(null, tail);        // Create header
     tail.setPrev(head);                    // Set prev link for trailer
     listSize = 0;
   }
@@ -21,7 +21,7 @@ class DList<E> implements List<E> {
   // Insert "it" at current position
 /* *** ODSATag: DListInsert *** */
   public boolean insert(E it) {
-    curr = new DLink<E>(it, curr.prev(), curr);
+    curr = new Link<E>(it, curr.prev(), curr);
     curr.prev().setNext(curr);
     curr.next().setPrev(curr);
     listSize++;
@@ -32,7 +32,7 @@ class DList<E> implements List<E> {
 // Append "it" to list
 /* *** ODSATag: DListAppend *** */
   public boolean append(E it) {
-    tail.setPrev(new DLink<E>(it, tail.prev(), tail));
+    tail.setPrev(new Link<E>(it, tail.prev(), tail));
     tail.prev().prev().setNext(tail.prev());
     if (curr == tail) curr = tail.prev();
     listSize++;
@@ -70,7 +70,7 @@ class DList<E> implements List<E> {
   public int length() { return listSize; } // Return list length
   // Return the position of the current element
   public int currPos() {
-    DLink<E> temp = head.next();
+    Link<E> temp = head.next();
     int i;
     for (i=0; curr != temp; i++)
       temp = temp.next();
@@ -95,7 +95,7 @@ class DList<E> implements List<E> {
   }
   
   public String toString() {
-		DLink<E> temp = head.next();
+		Link<E> temp = head.next();
 		StringBuffer out = new StringBuffer((listSize + 1) * 4);
 
 		out.append("< ");

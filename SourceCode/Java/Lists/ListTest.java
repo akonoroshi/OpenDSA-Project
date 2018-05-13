@@ -217,14 +217,18 @@ public class ListTest {
 	static void checkIns(List l, LinkedList<Object> tester, Object item) {
 		// Insert the item to both lists
 		tester.add(l.currPos(), item);
-		l.insert(item);
+		if (!l.insert(item)) {
+			record.printError("The insert method in " + l.getClass() + " returned false.");
+		}
 		check(l, tester, l.currPos());
 	}
 
 	static void checkApp(List l, LinkedList<Object> tester, Object item) {
 		// Append the item to both lists
 		tester.add(item);
-		l.append(item);
+		if (!l.append(item)) {
+			record.printError("The append method in " + l.getClass() + " returned false.");
+		}
 		check(l, tester, l.currPos());
 	}
 
@@ -299,22 +303,14 @@ public class ListTest {
 		// Test Integers
 		AList al = new AList();
 		LList ll = new LList();
-		DList dl = new DList();
-		Freelist fl = new Freelist();
 		testInt(al);
 		testInt(ll);
-		testInt(dl);
-		testInt(fl);
 
 		// Test Strings
 		AList al1 = new AList();
 		LList ll1 = new LList();
-		DList dl1 = new DList();
-		Freelist fl1 = new Freelist();
 		testStr(al1);
 		testStr(ll1);
-		testStr(dl1);
-		testStr(fl1);
 
 		// Get a feedback about the result (success or fail)
 		record.feedback();

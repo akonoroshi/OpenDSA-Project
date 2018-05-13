@@ -217,16 +217,18 @@ public class ListTest {
 	static <E> void checkIns(List<E> l, LinkedList<E> tester, E item) {
 		// Insert the item to both lists
 		tester.add(l.currPos(), item);
-		// TODO check returned value
-		l.insert(item);
+		if (!l.insert(item)) {
+			record.printError("The insert method in " + l.getClass() + " returned false.");
+		}
 		check(l, tester, l.currPos());
 	}
 
 	static <E> void checkApp(List<E> l, LinkedList<E> tester, E item) {
 		// Append the item to both lists
 		tester.add(item);
-		// TODO check returned value
-		l.append(item);
+		if (!l.append(item)) {
+			record.printError("The append method in " + l.getClass() + " returned false.");
+		}
 		check(l, tester, l.currPos());
 	}
 
@@ -301,24 +303,14 @@ public class ListTest {
 		// Test Integers
 		AList<Integer> al = new AList<Integer>();
 		LList<Integer> ll = new LList<Integer>();
-		DList<Integer> dl = new DList<Integer>();
-		Freelist<Integer> fl = new Freelist<Integer>();
 		testInt(al);
 		testInt(ll);
-		testInt(dl);
-		testInt(fl);
-		// TODO create a small AList
 
 		// Test Strings
 		AList<String> al1 = new AList<String>();
 		LList<String> ll1 = new LList<String>();
-		DList<String> dl1 = new DList<String>();
-		Freelist<String> fl1 = new Freelist<String>();
 		testStr(al1);
 		testStr(ll1);
-		testStr(dl1);
-		testStr(fl1);
-		// TODO create a small AList
 
 		// Get a feedback about the result (success or fail)
 		record.feedback();
