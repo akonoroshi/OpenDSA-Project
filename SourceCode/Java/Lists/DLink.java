@@ -1,19 +1,19 @@
 /* *** ODSATag: DLink *** */
-class DLink {            // Doubly linked list node
+class Link {            // Doubly linked list node
   private Object e;     // Value for this node
-  private DLink n;       // Pointer to next node in list
-  private DLink p;       // Pointer to previous node
+  private Link n;       // Pointer to next node in list
+  private Link p;       // Pointer to previous node
 
   // Constructors
-  DLink(Object it, DLink inp, DLink inn) { e = it;  p = inp; n = inn; }
-  DLink(DLink inp, DLink inn) { p = inp; n = inn; }
+  Link(Object it, Link inp, Link inn) { e = it;  p = inp; n = inn; }
+  Link(Link inp, Link inn) { p = inp; n = inn; }
 
   // Get and set methods for the data members
   public Object element() { return e; }                     // Return the value
   public Object setElement(Object it) { return e = it; }    // Set element value
-  public DLink next() { return n; }                          // Return next link
-  public DLink setNext(DLink nextval) { return n = nextval; } // Set next link
-  public DLink prev() { return p; }                          // Return prev link
-  public DLink setPrev(DLink prevval) { return p = prevval; } // Set prev link
+  public Link next() { return n; }                          // Return next link
+  public Link setNext(Link nextval) { return n = nextval; } // Set next link
+  public Link prev() { return p; }                          // Return prev link
+  public Link setPrev(Link prevval) { return p = prevval; } // Set prev link
 }
 /* *** ODSAendTag: DLink *** */

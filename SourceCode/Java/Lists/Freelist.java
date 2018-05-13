@@ -1,30 +1,30 @@
 // Linked list implementation that uses a Freelist
-class Freelist implements List {
-  private Freelink head;         // Pointer to list header
-  private Freelink tail;         // Pointer to last element
-  private Freelink curr;         // Access to current element
+class LList implements List {
+  private Link head;         // Pointer to list header
+  private Link tail;         // Pointer to last element
+  private Link curr;         // Access to current element
   private int listSize;      // Size of list
 
   // Constructors
-  Freelist(int size) { this(); }   // Constructor -- Ignore size
-  Freelist() { clear(); }
+  LList(int size) { this(); }   // Constructor -- Ignore size
+  LList() { clear(); }
 
   // Remove all elements
   public void clear() {
     while (head != null) {
-      Freelink temp = head.next();
+      Link temp = head.next();
       head.release();
       head = temp;
     }
-    curr = tail = Freelink.get(null, null); // Create trailer
-    head = Freelink.get(null, tail);        // Create header
+    curr = tail = Link.get(null, null); // Create trailer
+    head = Link.get(null, tail);        // Create header
     listSize = 0;
   }
   
 /* *** ODSATag: Freelist *** */
   // Insert "it" at current position
   public boolean insert(Object it) {
-    curr.setNext(Freelink.get(curr.element(), curr.next())); // Get link
+    curr.setNext(Link.get(curr.element(), curr.next())); // Get link
     curr.setElement(it);
     if (tail == curr) tail = curr.next();    // New tail
     listSize++;
@@ -33,7 +33,7 @@ class Freelist implements List {
 
   // Append "it" to list
   public boolean append(Object it) {
-    tail.setNext(Freelink.get(null, null));
+    tail.setNext(Link.get(null, null));
     tail.setElement(it);
     tail = tail.next();
     listSize++;
@@ -46,7 +46,7 @@ class Freelist implements List {
     Object it = curr.element();             // Remember value
     curr.setElement(curr.next().element()); // Pull forward the next element
     if (curr.next() == tail) tail = curr;   // Removed last, move tail
-    Freelink tempptr = curr.next();             // Remember the link
+    Link tempptr = curr.next();             // Remember the link
     curr.setNext(curr.next().next());       // Point around unneeded link
     tempptr.release();                      // Release the link
     listSize--;                             // Decrement element count
@@ -60,7 +60,7 @@ class Freelist implements List {
   // Move curr one step left; no change if now at front
   public void prev() {
     if (head.next() == curr) return;         // No previous element
-    Freelink temp = head;
+    Link temp = head;
     // March down list until we find the previous element
     while (temp.next() != curr) temp = temp.next();
     curr = temp;
@@ -74,7 +74,7 @@ class Freelist implements List {
 
   // Return the position of the current element
   public int currPos() {
-    Freelink temp = head.next();
+    Link temp = head.next();
     int i;
     for (i=0; curr != temp; i++)
       temp = temp.next();
@@ -102,7 +102,7 @@ class Freelist implements List {
 	return listSize == 0;
 }
   public String toString() {
-		Freelink temp = head.next();
+		Link temp = head.next();
 		StringBuffer out = new StringBuffer((listSize + 1) * 4);
 
 		out.append("< ");

@@ -44,28 +44,56 @@ build/Anal/success: Misc/Anal.java
 	javac $(CFLAGS) Anal.java; \
 	$(JAVA) $(RFLAGS) Anal
 
-Lists: ListTest StackTest QueueTest
+Lists: ListTest DoubleTest FreeList StackTest QueueTest
 
 ListTest: build/ListTest/success
 
-build/ListTest/success: Lists/ListTest.java Lists/List.java Lists/AList.java Lists/LList.java Lists/Link.java Lists/DList.java Lists/DLink.java Lists/Freelink.java Lists/Freelist.java Utils/ErrorRec.java
-	@echo "Array-based, Singly and Doubly Linked, and Free List Test"
+build/ListTest/success: Lists/ListTest.java Lists/List.java Lists/AList.java Lists/LList.java Lists/Link.java Utils/ErrorRec.java
+	@echo "Array-based and Linked List Test"
 	-@rm -rf build/ListTest
 	@mkdir build/ListTest
 	@cp Lists/List.java build/ListTest
 	@cp Lists/AList.java build/ListTest
 	@cp Lists/LList.java build/ListTest
 	@cp Lists/Link.java build/ListTest
-	@cp Lists/DList.java build/ListTest
-	@cp Lists/DLink.java build/ListTest
-	@cp Lists/Freelist.java build/ListTest
-	@cp Lists/Freelink.java build/ListTest
 	@cp Utils/ErrorRec.java build/ListTest
 	@cp Lists/ListTest.java build/ListTest
 	cd build/ListTest; \
 	javac $(CFLAGS) ListTest.java; \
 	$(JAVA) $(RFLAGS) ListTest
 
+DoubleTest: build/DoubleTest/success
+
+build/DoubleTest/success: Lists/ListTest.java Lists/List.java Lists/AList.java Lists/DList.java Lists/DLink.java Utils/ErrorRec.java
+	@echo "Doubly Linked List Test"
+	-@rm -rf build/DoubleTest
+	@mkdir build/DoubleTest
+	@cp Lists/ListTest.java build/DoubleTest
+	@cp Lists/List.java build/DoubleTest
+	@cp Lists/AList.java build/DoubleTest
+	@cp Lists/DList.java build/DoubleTest/LList.java
+	@cp Lists/DLink.java build/DoubleTest/Link.java
+	@cp Utils/ErrorRec.java build/DoubleTest
+	cd build/DoubleTest; \
+	javac $(CFLAGS) ListTest.java; \
+	$(JAVA) $(RFLAGS) ListTest
+
+FreeList: build/FreeList/success
+
+build/FreeList/success: Lists/List.java Lists/AList.java Lists/Freelink.java Lists/Freelist.java Lists/ListTest.java Utils/ErrorRec.java
+	@echo "Freelist Test"
+	-@rm -rf build/FreeList
+	@mkdir build/FreeList
+	@cp Lists/List.java build/FreeList
+	@cp Lists/AList.java build/FreeList
+	@cp Lists/Freelist.java build/FreeList/LList.java
+	@cp Lists/Freelink.java build/FreeList/Link.java
+	@cp Lists/ListTest.java build/FreeList
+	@cp Utils/ErrorRec.java build/FreeList
+	cd build/FreeList; \
+	javac $(CFLAGS) ListTest.java; \
+	$(JAVA) $(RFLAGS) ListTest
+	
 StackTest: build/StackTest/success
 
 build/StackTest/success: Lists/Stack.java Lists/AStack.java Lists/Link.java Lists/LStack.java Lists/StackTest.java Utils/ErrorRec.java

@@ -1,18 +1,18 @@
 // Doubly Linked list implementation
-class DList implements List {
-  private DLink head;         // Pointer to list header
-  private DLink tail;         // Pointer to last element
-  private DLink curr;         // Access to current element
+class LList implements List {
+  private Link head;         // Pointer to list header
+  private Link tail;         // Pointer to last element
+  private Link curr;         // Access to current element
   private int listSize;      // Size of list
 
   // Constructors
-  DList(int size) { this(); }     // Constructor -- Ignore size
-  DList() { clear(); }
+  LList(int size) { this(); }     // Constructor -- Ignore size
+  LList() { clear(); }
 
   // Remove all elements
   public void clear() {
-    curr = tail = new DLink(null, null); // Create trailer
-    head = new DLink(null, tail);        // Create header
+    curr = tail = new Link(null, null); // Create trailer
+    head = new Link(null, tail);        // Create header
     tail.setPrev(head);                 // Set prev link for trailer
     listSize = 0;
   }
@@ -21,7 +21,7 @@ class DList implements List {
   // Insert "it" at current position
 /* *** ODSATag: DListInsert *** */
   public boolean insert(Object it) {
-    curr = new DLink(it, curr.prev(), curr);
+    curr = new Link(it, curr.prev(), curr);
     curr.prev().setNext(curr);
     curr.next().setPrev(curr);
     listSize++;
@@ -32,7 +32,7 @@ class DList implements List {
 // Append "it" to list
 /* *** ODSATag: DListAppend *** */
   public boolean append(Object it) {
-    tail.setPrev(new DLink(it, tail.prev(), tail));
+    tail.setPrev(new Link(it, tail.prev(), tail));
     tail.prev().prev().setNext(tail.prev());
     if (curr == tail) curr = tail.prev();
     listSize++;
@@ -70,7 +70,7 @@ class DList implements List {
   public int length() { return listSize; } // Return list length
   // Return the position of the current element
   public int currPos() {
-    DLink temp = head.next();
+    Link temp = head.next();
     int i;
     for (i=0; curr != temp; i++)
       temp = temp.next();
@@ -98,7 +98,7 @@ class DList implements List {
   public boolean isEmpty() { return listSize == 0; }
   
   public String toString() {
-		DLink temp = head.next();
+		Link temp = head.next();
 		StringBuffer out = new StringBuffer((listSize + 1) * 4);
 
 		out.append("< ");
