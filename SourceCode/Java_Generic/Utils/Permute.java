@@ -1,4 +1,4 @@
-/** Initialize the random variable */
+  /** Initialize the random variable */
   static private Random value = new Random(); // Hold the Random class object
 
   /** Create a random number function from the standard Java Random

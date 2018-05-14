@@ -1,5 +1,3 @@
-
-
 /* *** ODSATag: BSTNode *** */
 // Binary tree node implementation: supports comparable objects
 class BSTNode<E extends Comparable<? super E>> implements BinNode<E> {

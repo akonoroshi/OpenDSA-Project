@@ -1,5 +1,3 @@
-
-
 /* *** ODSATag: BST *** */
 // Binary Search Tree implementation
 class BST<E extends Comparable<E>> {

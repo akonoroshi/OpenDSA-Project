@@ -1,11 +1,10 @@
-
 /* *** ODSATag: KVPair *** */
 // KVPair class definition
 public class KVPair<K extends Comparable<K>, E> implements Comparable<KVPair<K, E>> {
   K theKey;
   E theVal;
 
-  public KVPair(K k, E v) {
+  KVPair(K k, E v) {
     theKey = k;
     theVal = v;
   }

@@ -1,6 +1,3 @@
-
-
-public class Processing {
 // Convenience functions for consistency with Processing code
 
 static public void println(String s) {

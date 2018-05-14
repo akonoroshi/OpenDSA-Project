@@ -1,6 +1,4 @@
 import java.io.*;
 
-public class Traverse1 {
-	
-}
+public class Traverse {
 
