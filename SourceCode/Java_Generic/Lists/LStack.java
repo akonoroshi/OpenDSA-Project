@@ -42,7 +42,8 @@ class LStack<E> implements Stack<E> {
   }
 /* *** ODSAendTag: LStackPop *** */
 
-  public E topValue() {      // Return top value
+  //Return top value
+  public E topValue() {
     if (top == null) return null;
     return top.element();
   }

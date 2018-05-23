@@ -2,7 +2,7 @@
 // Linked queue implementation
 class LQueue<E> implements Queue<E> {
   private Link<E> front; // Pointer to front queue node
-  private Link<E> rear;  // Pointer to rear queuenode
+  private Link<E> rear;  // Pointer to rear queue node
   private int size;      // Number of elements in queue
 
   // Constructors
